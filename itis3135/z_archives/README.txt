@@ -1,0 +1,1 @@
+This folder is for JUNK FILES YOU ARE AFRAID TO DELETE
