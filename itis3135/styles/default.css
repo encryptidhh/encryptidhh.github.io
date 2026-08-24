@@ -4,7 +4,12 @@ a:link {
 a:visited {
   color: green;
 }
-
+h1 {
+  font-family: "Ravenna", "Courier", "Courier New", sans-serif;
+}
+p {
+  font-family: "Calibri", sans-serif;
+}
 body {
   background-color: lightblue;
 }
