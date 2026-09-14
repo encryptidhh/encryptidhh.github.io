@@ -1,13 +1,16 @@
 a:link {
-  color: red;
+  color: #E7DECD;
 }
 a:visited {
   color: green;
 }
-h1 {
+h1, h3 {
   font-family: "Courier New", Courier, monospace;
 }
 .body {
   font-family: "Calibri", sans-serif;
+}
+
+body {
   background-color: lightblue;
 }
