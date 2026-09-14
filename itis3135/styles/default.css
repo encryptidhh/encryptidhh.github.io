@@ -7,9 +7,7 @@ a:visited {
 h1 {
   font-family: "Courier New", Courier, monospace;
 }
-p {
+.body {
   font-family: "Calibri", sans-serif;
-}
-body {
   background-color: lightblue;
 }
