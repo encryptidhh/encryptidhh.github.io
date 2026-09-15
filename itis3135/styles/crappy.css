@@ -1,0 +1,11 @@
+body {
+    background-color: #ffffff;
+}
+
+ul li {
+    border: 200mm dotted blue;
+}
+
+.font-2 {
+    font-family: "Comic Sans MS";
+}
