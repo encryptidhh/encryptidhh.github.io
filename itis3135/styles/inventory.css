@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:wght@400;600&display=swap');
+
+:root {
+  --paper: #f6f1e4;
+  --card: #fbf8f0;
+  --ink: #2b2420;
+  --ink-soft: #6b6255;
+  --rule: #c9bfa6;
+  --gold: #b8863b;
+  --gold-light: #d9a94a;
+  --moss: #6f8a4e;
+  --moss-light: #8fab6b;
+  --slate: #45646b;
+  --slate-light: #5c7d85;
+  --amber: #c08a2e;
+  --amber-light: #d9a94a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 4rem 1.5rem;
+  background: var(--paper);
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(184, 134, 59, 0.06), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(111, 138, 78, 0.06), transparent 40%);
+  color: var(--ink);
+  font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  letter-spacing: 0.01em;
+  margin: 0 0 0.35rem;
+  color: var(--ink);
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 0.9rem auto 2.5rem;
+  background: linear-gradient(90deg, var(--gold), var(--moss));
+  border-radius: 2px;
+}
+
+table {
+  border-collapse: collapse;
+  width: min(920px, 100%);
+  background: var(--card);
+  box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(43, 36, 32, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+thead th {
+  text-align: left;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+tbody td {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+tbody td:first-child { font-weight: 600; }
+tbody td:nth-child(3) { color: var(--ink-soft); font-style: italic; }
+
+/* --- Rule 8: attribute selectors for row status, applying a gradient wash --- */
+tr[class="read"] {
+  background-image: linear-gradient(135deg, #eef1e4, #dfe6d0);
+}
+tr[class="to-read"] {
+  background-image: linear-gradient(135deg, #e7eef0, #d2e0e3);
+}
+tr[class="in-progress"] {
+  background-image: linear-gradient(135deg, #f5ead2, #eddcb0);
+}
+
+/* --- Rule 9: every span behaves as a block-ish inline element --- */
+span {
+  display: inline-block;
+}
+
+/* --- Rules 10-12: status badges, styled per row status --- */
+tr[class="to-read"] span[class="status"] {
+  border: 1px solid var(--slate);
+  background-image: linear-gradient(135deg, var(--slate), var(--slate-light));
+  color: #f6f1e4;
+}
+tr[class="read"] span[class="status"] {
+  border: 1px solid var(--moss);
+  background-image: linear-gradient(135deg, var(--moss), var(--moss-light));
+  color: #f6f1e4;
+}
+tr[class="in-progress"] span[class="status"] {
+  border: 1px solid var(--amber);
+  background-image: linear-gradient(135deg, var(--amber), var(--amber-light));
+  color: #2b2420;
+}
+
+/* --- Rule 13: shared sizing for the status badge and the rate wrapper --- */
+span[class="status"],
+span[class^="rate"] {
+  height: 26px;
+  width: 96px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+span[class^="rate"] {
+  width: 76px;
+  background: transparent;
+  padding: 0;
+}
+
+/* --- Rule 14: the three empty pip spans inside every rate wrapper --- */
+span[class^="rate"] > span {
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  margin: 0 2px;
+  height: 14px;
+  width: 14px;
+  background-color: #e8e1d0;
+}
+
+/* --- Rule 15: one filled pip for a "one" rating --- */
+span[class~="one"] span:first-child {
+  background-image: linear-gradient(135deg, var(--gold-light), var(--gold));
+}
+
+/* --- Rule 16: two filled pips for a "two" rating --- */
+span[class~="two"] span:nth-child(-n+2) {
+  background-image: linear-gradient(135deg, var(--gold-light), var(--gold));
+}
+
+/* --- Rule 17: three filled pips for a "three" rating --- */
+span[class~="three"] span {
+  background-image: linear-gradient(135deg, var(--gold-light), var(--gold));
+}
+
+@media (max-width: 640px) {
+  table { font-size: 0.85rem; }
+  thead th, tbody td { padding: 0.6rem 0.6rem; }
+}

@@ -1,14 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
-    <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
-    <link rel="stylesheet" href="styles/default.css">
-    <title>Build a Survey Form | FCC Project</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+        <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
+        <link rel="stylesheet" href="styles/default.css">
+        <title>Build a Survey Form | FCC Project</title>
+    </head>
+    <body>
+        <div data-include="components/header.html"></div>
+        <h1 id="title">freeCodeCamp Survey Form</h1>
+        <p id="description">Thank you for taking the time to help us improve the platform.</p>
+        <form id="survey-form">
+        <label for="name" id="name-label">Name: </label>
+        <input id="name" type="text" required placeholder="e.g., Jane Doe"/>
+        <br/>
+        <label for="email" id="email-label">Email: </label>
+        <input id="email" type="email" required placeholder="e.g., name@website.com"/>
+        <br/>
 
-    <div include="components/footer.html"></div>
-    <script src="scripts/HTMLInclude.min.js"></script>
+        <label for="number" id="number-label">Age (optional): </label>
+        <input id="number" type="number" min="3" max="1000" placeholder="e.g., 25"/>
+        <br/><br/>
+
+        <label for="role" id="role-label">Which option best describes your current role?</label>
+        <select id="dropdown">
+        <option value="student">Student</option>
+        <option value="professional-dev" selected>Professional Developer</option>
+        <option value="hobbyist">Hobbyist</option>
+        <option value="unspecified">Prefer not to say</option>
+        <option value="other">Other</option>
+        </select>
+        <br/>
+
+        <p>Would you recommend freeCodeCamp to a friend?</p>
+
+        <input id="yes-radio" type="radio" name="recommendation" value="yes">
+        <label for="yes-radio">Yes</label>
+        <input id="no-radio" type="radio" name="recommendation" value="no">
+        <label for="no-radio">No</label>
+        <input id="maybe-radio" type="radio" name="recommendation" value="maybe">
+        <label for="maybe-radio">Maybe</label>
+        <input id="unsure-radio" type="radio" name="recommendation" value="unsure">
+        <label for="unsure-radio">Not sure</label>
+
+        <br/><br/>
+
+        <label for="favorite-dropdown">What is your favorite part of freeCodeCamp?</label>
+        <select name="food" id="favorite-dropdown">
+        <option value="projects">Projects</option>
+        <option value="open-source">Open-Source</option>
+        <option value="community">Community</option>
+        </select>
+
+        <br/><br/>
+        <label for="checkboxes">What would you like to see improved? (Check all that apply)</label>
+        <input id="front-end-projects" value="front-end-projects" type="checkbox">
+        <label for="front-end-projects">Front-End Projects</label>
+        <input id="back-end-projects" type="checkbox" value="back-end-projects">
+        <label for="back-end-projects">Back-End Projects</label>
+        <input id="more-courses" value="more-courses" type="checkbox">
+        <label for="more-courses">Additional Courses</label>
+        <input id="walkthroughs" value="walkthroughs" type="checkbox">
+        <label for="walkthroughs">Walkthroughs/Tutorials</label>
+        <br/><br/>
+
+        <label for="comments">Other Comments?</label>
+        <textarea cols="30" rows="10" name="comments" id="comments"></textarea>
+
+        <button id="submit" type="submit">Submit</button>
+        </form>
+        <div data-include="components/footer.html"></div>
+        <script src="scripts/HTMLInclude.min.js"></script>
+    </body>
 </html>

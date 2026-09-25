@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #1b4332 radial-gradient(circle at center, #2d6a4f 0%, #1b4332 70%);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* the table layout: flex container for all cards */
+#playing-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 2rem;
+  max-width: 900px;
+}
+
+/* an individual card: flex row with content at both ends */
+.card {
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+  height: 252px;
+  padding: 0.75rem;
+  background: #fffdf7;
+  border: 1px solid #d8d3c3;
+  border-radius: 14px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* corner indices */
+.left {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1.1;
+}
+
+.right {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1.1;
+  transform: rotate(180deg);
+}
+
+/* center pips stacked vertically */
+.middle {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 2rem;
+}
+
+/* red suits */
+.card:nth-child(2),
+.card:nth-child(3) {
+  color: #c1121f;
+}
+
+/* black suits stay the default dark color */
+.card:nth-child(1),
+.card:nth-child(4) {
+  color: #22223b;
+}

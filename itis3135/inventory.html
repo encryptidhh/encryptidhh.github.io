@@ -5,10 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
     <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
-    <link rel="stylesheet" href="styles/default.css">
+    <link rel="stylesheet" href="styles/inventory.css">
     <title>Build a Book Inventory App | FCC Project</title>
 </head>
+<body>
+    <div data-include="components/header.html"></div>
+  <h1>Book Inventory</h1>
 
-    <div include="components/footer.html"></div>
-    <script src="scripts/HTMLInclude.min.js"></script>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="read">
+        <td>Circe</td>
+        <td>Madeline Miller</td>
+        <td>Fantasy</td>
+        <td><span class="status">Read</span></td>
+        <td>
+          <span class="rate three">
+            <span></span><span></span><span></span>
+          </span>
+        </td>
+      </tr>
+      <tr class="read">
+        <td>Sapiens</td>
+        <td>Yuval Noah Harari</td>
+        <td>Nonfiction</td>
+        <td><span class="status">Read</span></td>
+        <td>
+          <span class="rate two">
+            <span></span><span></span><span></span>
+          </span>
+        </td>
+      </tr>
+      <tr class="to-read">
+        <td>Project Hail Mary</td>
+        <td>Andy Weir</td>
+        <td>Sci-Fi</td>
+        <td><span class="status">To Read</span></td>
+        <td>
+          <span class="rate">
+            <span></span><span></span><span></span>
+          </span>
+        </td>
+      </tr>
+      <tr class="in-progress">
+        <td>The Name of the Wind</td>
+        <td>Patrick Rothfuss</td>
+        <td>Fantasy</td>
+        <td><span class="status">In Progress</span></td>
+        <td>
+          <span class="rate">
+            <span></span><span></span><span></span>
+          </span>
+        </td>
+      </tr>
+      <tr class="read">
+        <td>Educated</td>
+        <td>Tara Westover</td>
+        <td>Memoir</td>
+        <td><span class="status">Read</span></td>
+        <td>
+          <span class="rate one">
+            <span></span><span></span><span></span>
+          </span>
+        </td>
+      </tr>
+      <tr class="to-read">
+        <td>The Overstory</td>
+        <td>Richard Powers</td>
+        <td>Fiction</td>
+        <td><span class="status">To Read</span></td>
+        <td>
+          <span class="rate">
+            <span></span><span></span><span></span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div data-include="components/footer.html"></div>
+  <script src="scripts/HTMLInclude.min.js"></script>
+</body>
 </html>

@@ -5,10 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
     <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
-    <link rel="stylesheet" href="styles/default.css">
+    <link rel="stylesheet" href="styles/documentation.css">
     <title>Build a Technical Documentation Page | FCC Project</title>
 </head>
+<body>
+    <div data-include="components/header.html"></div>
+    <nav id="navbar">
+    <header>Git, Actually</header>
+        <a class="nav-link" href="#Why_Git_Exists">Why Git Exists</a>
+        <a class="nav-link" href="#Getting_a_Repository">Getting a Repository</a>
+        <a class="nav-link" href="#The_Basic_Loop">The Basic Loop</a>
+        <a class="nav-link" href="#Branching_and_Merging">Branching and Merging</a>
+        <a class="nav-link" href="#Working_with_Remotes">Working with Remotes</a>
+        <a class="nav-link" href="#Undoing_Things">Undoing Things</a>
+    </nav>
 
-    <div include="components/footer.html"></div>
-    <script src="scripts/HTMLInclude.min.js"></script>
+  <main id="main-doc">
+
+    <section class="main-section" id="Why_Git_Exists">
+      <header>Why Git Exists</header>
+      <p>Before Git, most teams tracked changes to code by emailing zip files back and forth, or by working on one shared server and hoping nobody's edits collided. Git was built to solve that problem: it lets many people edit the same project at the same time, keeps a full history of every change, and gives everyone a complete copy of that history on their own machine.</p>
+      <p>Because every clone of a Git project holds the entire history, you can commit, branch, and inspect old versions without needing a network connection. The server only becomes relevant when you want to share your work with others.</p>
+      <ul>
+        <li>Every collaborator has a full copy of the project's history</li>
+        <li>Changes are tracked as snapshots, not as a list of differences</li>
+        <li>Nothing is truly deleted until you tell Git to clean it up</li>
+      </ul>
+    </section>
+
+    <section class="main-section" id="Getting_a_Repository">
+      <header>Getting a Repository</header>
+      <p>A Git project lives inside a repository, which is just a regular folder with a hidden <code>.git</code> directory that stores the history. You end up with a repository in one of two ways: starting a brand new one, or copying an existing one from somewhere else.</p>
+      <p>To start tracking a new folder, run <code>git init</code> inside it. Git will quietly create the <code>.git</code> directory and begin watching that folder for changes, though it won't record anything until you explicitly ask it to.</p>
+      <p>To copy an existing project, run <code>git clone</code> followed by the repository's URL. This downloads the full history, not just the latest snapshot, which is why clones of old projects can sometimes take a while.</p>
+      <ul>
+        <li><code>git init</code> — start tracking the current folder</li>
+        <li><code>git clone &lt;url&gt;</code> — copy an existing repository</li>
+      </ul>
+    </section>
+
+    <section class="main-section" id="The_Basic_Loop">
+      <header>The Basic Loop</header>
+      <p>Day-to-day Git work follows the same small loop over and over: you edit files, you stage the ones you want to record, and you commit that stage as a snapshot with a message describing what changed.</p>
+      <p>Staging exists as its own step because it lets you build a commit out of only part of what you've changed. You might have edited three files but only want to commit one of them right now — staging makes that possible.</p>
+      <p>A typical session looks like editing a file, checking what changed with <code>git status</code>, staging it with <code>git add</code>, and recording it with <code>git commit</code>.</p>
+      <ul>
+        <li><code>git status</code> — see what's changed and what's staged</li>
+        <li><code>git add &lt;file&gt;</code> — stage a file for the next commit</li>
+        <li><code>git commit -m "message"</code> — record the staged snapshot</li>
+      </ul>
+    </section>
+
+    <section class="main-section" id="Branching_and_Merging">
+      <header>Branching and Merging</header>
+      <p>A branch is nothing more than a movable pointer to a commit. Creating one is cheap and fast, which is why Git culture encourages branching freely for every feature, fix, or experiment rather than working directly on the main line of history.</p>
+      <p>You switch between branches with <code>git switch</code> (or the older <code>git checkout</code>), and create a new one with <code>git branch</code> or in one step with <code>git switch -c</code>.</p>
+      <p>When a branch's work is ready to combine back in, <code>git merge</code> brings its changes into your current branch. If both branches touched the same lines, Git will ask you to resolve the conflict by hand before the merge can finish.</p>
+      <p>Some teams prefer <code>git rebase</code> instead of merging, which replays your commits on top of another branch to keep history looking like a straight line rather than a web of merges.</p>
+      <ul>
+        <li><code>git branch &lt;name&gt;</code> — create a new branch</li>
+        <li><code>git switch &lt;name&gt;</code> — move to a different branch</li>
+      </ul>
+    </section>
+
+    <section class="main-section" id="Working_with_Remotes">
+      <header>Working with Remotes</header>
+      <p>A remote is simply another copy of the repository, usually hosted somewhere like GitHub or GitLab, that you and your collaborators push work to and pull work from. Your local repository can track several remotes at once, though most projects only ever need one, conventionally named <code>origin</code>.</p>
+      <p><code>git push</code> uploads your committed work to a remote, and <code>git pull</code> downloads and merges in whatever others have pushed. It's worth running <code>git pull</code> often, since Git will refuse a push that would overwrite history it hasn't seen yet.</p>
+      <p>For a closer look without merging, <code>git fetch</code> downloads a remote's history but leaves your own branches untouched until you decide what to do with it.</p>
+      <ul>
+        <li><code>git push</code> — send local commits to a remote</li>
+        <li><code>git pull</code> — fetch and merge remote changes</li>
+      </ul>
+    </section>
+
+    <section class="main-section" id="Undoing_Things">
+      <header>Undoing Things</header>
+      <p>Mistakes are routine in Git, and most of them are recoverable because so little is ever truly discarded. The right command depends on how far the mistake has traveled: whether it's still sitting in your working files, staged, or already committed.</p>
+      <p>To unstage a file without losing your edits, use <code>git restore --staged</code>. To throw away uncommitted edits entirely and return a file to its last commit, use <code>git restore</code> on its own.</p>
+      <p>If the mistake is already committed, <code>git revert</code> creates a new commit that undoes a previous one, which is the safer option once you've shared history with others. <code>git reset</code> can rewrite history outright, but should be used carefully, and mainly on commits nobody else has pulled yet.</p>
+      <p>When in doubt, <code>git log</code> is the first place to look — it shows the trail of commits that led to where you are now, and makes it much easier to decide what to undo.</p>
+      <ul>
+        <li><code>git restore &lt;file&gt;</code> — discard uncommitted changes</li>
+        <li><code>git revert &lt;commit&gt;</code> — safely undo a shared commit</li>
+      </ul>
+    </section>
+
+  </main>
+  <div data-include="components/footer.html"></div>
+  <script src="scripts/HTMLInclude.min.js"></script>
+</body>
 </html>

@@ -5,10 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
     <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
-    <link rel="stylesheet" href="styles/default.css">
+    <link rel="stylesheet" href="styles/product.css">
     <title>Build a Product Landing Page | FCC Project</title>
 </head>
+<body>
+    <div data-include="components/header.html"></div>
+  <header id="header">
+    <img
+      id="header-img"
+      src="https://i.imgur.com/pG7JJzT.png"
+      alt="TerraGlow logo"
+    />
+    <nav id="nav-bar">
+      <a class="nav-link" href="#features">Features</a>
+      <a class="nav-link" href="#how-it-works">How It Works</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+    </nav>
+  </header>
 
-    <div include="components/footer.html"></div>
-    <script src="scripts/HTMLInclude.min.js"></script>
+  <main>
+    <section id="hero">
+      <h1>Meet <span class="accent">TerraGlow</span></h1>
+      <p>The planter that waters itself — and keeps your plants thriving even when you forget they exist.</p>
+    </section>
+
+    <section id="features">
+      <h2>Why You'll Love It</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>🌱 Self-Watering Reservoir</h3>
+          <p>A 2-week water supply drawn up by natural capillary action. No pumps, no noise.</p>
+        </div>
+        <div class="feature-card">
+          <h3>💡 Grow Light Ring</h3>
+          <p>A built-in full-spectrum LED ring gives your plants the light they crave, dawn to dusk.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📱 Smart Alerts</h3>
+          <p>The companion app nudges you only when it truly matters — refills, low light, repotting.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <h2>See It In Action</h2>
+      <iframe
+        id="video"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="TerraGlow product demo"
+        allowfullscreen
+      ></iframe>
+    </section>
+
+    <section id="pricing">
+      <h2>Choose Your TerraGlow</h2>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Sprout</h3>
+          <p class="price">$39</p>
+          <ul>
+            <li>500ml reservoir</li>
+            <li>2 LED tones</li>
+          </ul>
+        </div>
+        <div class="price-card featured">
+          <h3>Bloom</h3>
+          <p class="price">$59</p>
+          <ul>
+            <li>1L reservoir</li>
+            <li>Full-spectrum LEDs</li>
+            <li>App connectivity</li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <h3>Grove</h3>
+          <p class="price">$89</p>
+          <ul>
+            <li>Dual planter</li>
+            <li>All Bloom features</li>
+            <li>Mist attachment</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="signup">
+      <h2>Get Early Access</h2>
+      <p>Join the waitlist and get 20% off at launch.</p>
+      <form id="form" action="https://www.freecodecamp.org/email-submit">
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Enter your email address"
+          required
+        />
+        <input id="submit" type="submit" value="Join Waitlist" />
+      </form>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <p>© 2026 TerraGlow. Grow happier.</p>
+  </footer>
+  <div include="components/footer.html"></div>
+  <script src="scripts/HTMLInclude.min.js"></script>
+</body>
 </html>
