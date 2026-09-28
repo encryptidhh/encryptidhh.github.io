@@ -1,0 +1,17 @@
+a:link {
+  color: #F2AF29;
+}
+
+a:visited {
+  color: #E7DECD;
+}
+h1, h2, h3 {
+  font-family: "Courier New", Courier, monospace;
+}
+.body {
+  font-family: "Calibri", sans-serif;
+}
+
+body {
+  background-color: royalblue;
+}
