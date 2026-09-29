@@ -14,3 +14,43 @@ h1, h2, h3 {
 body {
   background-color: lightblue;
 }
+
+
+/* Sample code for CSS box styling */
+/* ---------- Base ---------- 
+* { box-sizing: border-box; }   /* makes padding+border behave predictably 
+
+body {
+  background-color: #f5f0e6;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+/* ---------- Module: content block ---------- 
+.content-block {
+  max-width: 700px;           /* keeps text readable, centers like your screenshot 
+  margin: 20px auto;          /* center the module, space between modules 
+  padding: 20px;
+  border: 2px solid #2e8b57; /* the green box in your Portion 3 
+  background-color: #fbf8f1;
+}
+
+/* ---------- Module: centered image ---------- 
+figure.photo {
+  text-align: center;
+}
+figure.photo img {
+  max-width: 100%;   /* never overflow its container 
+  height: auto;      /* keep aspect ratio 
+  border: 2px solid #2e8b57;
+}
+
+/* ---------- Header / nav ---------- 
+header {
+  max-width: 700px;
+  margin: 20px auto;
+  border: 2px solid #2e8b57;
+  text-align: center;
+  padding: 10px;
+}
+nav { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }*/
