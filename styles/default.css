@@ -1,3 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+.content-block {
+  max-width: 700px;           /* keeps text readable, centers like your screenshot */
+  margin: 20px auto;          /* center the module, space between modules */
+  padding: 20px;
+  font-family: 'Inter', 'Courier New', sans-serif;
+}
+
+.content-block p {
+  font-size: 14px;
+}
+
+
+.header {
+  color: #F5F5F5;
+  background-color: #3C4E68;
+}
+
+.header h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
+}
+
+
+.header p {
+  padding-left: 20px;
+  padding-right: 20px; 
+  margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
+  font-family: 'Inter', sans-serif;
+}
+
+.header nav {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  font-family: 'Inter', sans-serif;
+}
+
 a:link {
   color: #F2AF29;
 }
@@ -10,8 +58,38 @@ h1, h2, h3 {
 }
 .body {
   font-family: "Calibri", sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-body {
-  background-color: royalblue;
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 12px;
+  }
 }
+
+* { box-sizing: border-box; }   /* makes padding+border behave predictably */ 
+
+
+/*---------- Module: content block ---------- */
+
+/* ---------- Module: centered image ---------- 
+figure.photo {
+  text-align: center;
+}
+figure.photo img {
+  max-width: 100%;   /* never overflow its container 
+  height: auto;      /* keep aspect ratio 
+  border: 2px solid #2e8b57;
+}
+
+/* ---------- Header / nav ---------- 
+header {
+  max-width: 700px;
+  margin: 20px auto;
+  border: 2px solid #2e8b57;
+  text-align: center;
+  padding: 10px;
+}
+nav { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
