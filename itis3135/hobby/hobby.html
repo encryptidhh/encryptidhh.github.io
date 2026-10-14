@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, intial-scale=1">
+        <title>Plant Growing | Hobby Site</title>
+        <style>
+            :root {
+                --forest: #10291f;
+                --moss: #173a2c;
+                --leaf: #2f7d5b;
+                --mint: #bfe3cf;
+                --cream: #f7f1df;
+                --sun: #f2c14e;
+                --clay: #c96f4a;
+                --ink: #f7f1df;
+                --shadow: rgba(0, 0, 0, .28);
+            }
+            
+            * { 
+                box-sizing: border-box; 
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: Georgia, "Palatino Linotype", serif; /* mideterm req's: no default Times New Roman */
+                line-height: 1.65; 
+                color: var(--ink);
+                background:
+                    radial-gradient(circle at top left, rgba(47, 125, 91, .5), transparent 34rem), 
+                    linear-gradient(145deg, var(--forest), var(--moss) 58%, #0c211a);
+            }
+
+            a {
+                color: var(--sun);
+                text-decoration: none;
+                border-bottom: .12rem solid rgba(242, 193, 78, .45);
+            }
+
+            a:hover, a:focus-visible {
+                color: var(--mint);
+                border-bottom-color: var(--mint);
+                outline: .18rem soild var(--sun);
+                outline-offset: .2rem;
+            }
+
+            header, footer {
+                width: min(1120px, calc(100% - 2rem));
+                margin-inline: auto;
+            }
+
+            header {
+                padding: 1.5rem 0 1rem;
+            }
+
+            h1 {
+                margin: 0;
+                font-size: clamp(2rem, 4vw, 3.4rem);
+                letter-spacing: .04em;
+                text-transform: uppercase;
+            }
+
+            .kicker {
+                margin: .2rem 0 1rem;
+                color: var(--mint);
+                font-style: italic;
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: .75rem;
+                align-items: center;
+                padding: .85rem;
+                border: 1px solid rgba(247, 241, 223, .22);
+                border-radius: 999px;
+                background: rgba(16, 41, 31, .72);
+                box-shadow: 0 1rem 2.5rem var(--shadow);
+                backdrop-filter: blur(.4rem);
+            }
+
+            nav a[aria-current="true"] {
+                color: #10291f;
+                background: var(--sun);
+                border-bottom-color: transparent;
+            }
+
+            nav a {
+                padding: .45rem .8rem;
+                border-radius: 999px;
+                border-bottom: 0;
+                font-weight: 700;
+            }
+
+            .divider {
+                display: none;
+                padding: clamp(1.2rem, 3vw, 2.4rem);
+                border: 1px solid rgba(247, 241, 223, .2);
+                border-radius: 1.4rem;
+                background: linear-gradient(180deg, rgba(247, 241, 223, .08), rgba(247, 241, 223, .035));
+                box-shadow: 0 1.2rem 3rem var(--shadow);
+            }
+
+            section.active {
+                display: block;
+            }
+
+            h2 {
+                margin-top: 0;
+                color: var(--mint);
+                font-size: clamp(1.6rem, 3vw, 2.3rem);
+                border-bottom: .24rem solid var(--clay);
+                padding-bottom: .35rem;
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 1rem;
+                align-items: start;
+            }
+
+            p, li, td, th {
+                color: var(--cream);
+            }
+
+            figure {
+                margin: 0;
+                padding: .9rem;
+                border-radius: 1rem;
+                background: rgba(191, 227, 207, .1);
+                border: 1px dashed rgba(191, 227, 207, .55);
+            }
+
+            figure img {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: .75rem;
+                background: #234;
+            }
+
+            figcaption {
+                margin-top: .55rem;
+                color: var(--mint);
+                font-weight: 700;
+            }
+
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                overflow: hidden;
+                border-radius: .8rem;
+            }
+
+            caption {
+                caption-side: top;
+                text-align: left;
+                color: var(--sun);
+                font-weight: 700;
+                padding-bottom: .4rem;
+            }
+
+            th, td {
+                padding: .75rem;
+                border: 1px solid rgba(247, 241, 223, .2);
+                text-align: left;
+                vertical-align: top;
+            }
+
+            th {
+                background: rgba(47, 125, 91, .55);
+            }
+
+            td {
+                background: rgba(16, 41, 31, .38);
+            }
+
+            ul, ol {
+                padding-left: 1.25rem;
+            }
+
+            li + li {
+                margin-top :.35rem;
+            }
+
+            form {
+                display: grid;
+                gap: .7rem;
+                padding: 1rem;
+                border-radius: 1rem;
+                background: rgba(242, 193, 78, .12);
+                border: 1px solid rgba(242, 193, 78, .35);
+                border-radius: .65rem;
+                padding: .65rem .75rem;
+            }
+
+            textarea {
+                min-height: 7rem;
+                resize: vertical;
+            }
+
+            button {
+                cursor: pointer;
+                color: #10291f;
+                background: var(--sun);
+                border: 0;
+                font-weight: 800;
+                letter-spacing :.03rem;
+            }
+
+            button:hover, button:focus-visible {
+                background: var(--mint);
+                outline: .18rem solid var(--cream);
+                outline-offset: .15rem;
+            }
+
+            footer {
+                padding: 0 0 2.5rem;
+            }
+
+            .footer-card {
+                display: flex;
+                flex-wrap: wrap;
+                gap: .8rem;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem;
+                border-radius: 1rem;
+                background: rgba(16, 41, 31, .76);
+                border: 1px solid rgba(247, 241, 223, .22);
+            }
+
+            .validators {
+                display: flex;
+                flex-wrap: wrap;
+                gap: .6rem;
+            }
+
+            .validators a, .firm {
+                display: inline-flex;
+                align-items: center;
+                min-height: 2.6rem;
+                padding: .55rem .85rem;
+                border-radius: 999px;
+                border: 1px solid rgba(242, 191, 78, .65);
+                background: rgba(242, 193, 78, .12);
+                font-weight: 800;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                html { scroll-behavior: auto; }
+                * { transition: none !important; animation: none !important; }
+            }
+        </style>
+        <base target="_blank">
+    </head>
+    <body>
+        <header>
+            <h1>Verdant Hands | Plant Growing</h1>
+            <p class="kicker">A hobby site about growing plants, one hopeful leaf at a time.</p>
+            <nav aria-label="Hobby sections">
+                <a href="#who" data-section="who">Who</a><span class="divider" aria-hidden="true">🌿</span>
+                <a href="#what" data-section="what" aria-current="true">What</a><span class="divider" aria-hidden="true">🌿</span>
+                <a href="#when" data-section="when">When</a><span class="divider" aria-hidden="true">🌿</span>
+                <a href="#where" data-section="where">Where</a><span class="divider" aria-hidden="true">🌿</span>
+                <a href="#how" data-section="how">How</a><span class="divider" aria-hidden="true">🌿</span>
+                <a href="#why" data-section="why">Why</a>
+            </nav>
+        </header>
+
+        <main>
+
+            <section id="who" aria-labelledby="who-title">
+                <h2 id="who-title">Who</h2>
+                <p>PLACEHOLDER TEXT FOR WHO</p>
+                <div class="grid">
+                    <figure>
+                        <img src="https://placehold.co/900x520/2f7d5b/f7f1df?text=Grower+Portrait" alt="Placeholder portrait of a plant grower">
+                        <figcaption>Placeholder grower portrait</figcaption>
+                    </figure>
+                    <ul>
+                        <li>PLACEHOLDER ITEM 1</li>
+                        <li>PLACEHOLDER ITEM 2</li>
+                        <li>PLACEHOLDER ITEM 3</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="what" class="active" aria-labelledby="what-title">
+                <h2 id="what-title">What</h2>
+                <p>PLACEHOLDER TEXT FOR WHAT</p>
+                <div class="grid">
+                    <figure>
+                        <img src="https://placehold.co/900x520/173a2c/f2c14e?text=Windowsill+Garden" alt="Placeholder image of a windowsill garden">
+                        <figcaption>Placeholder windowsill garden</figcaption>
+                        <p class="ai-prompt">AI prompt placeholder: “Illustrate a cozy windowsill garden with herbs, pothos, and labeled care tags.”</p>
+                    </figure>
+                    <table>
+                        <caption>Placeholder plant start table</caption>
+                        <thead>
+                            <tr>
+                                <th>Plant</th>
+                                <th>Light</th>
+                                <th>Water</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PLACEHOLDER</td>
+                                <td>PLACEHOLDER</td>
+                                <td>PLACEHOLDER</td>
+                            </tr>
+                            <tr>
+                                <td>PLACEHOLDER</td>
+                                <td>PLACEHOLDER</td>
+                                <td>PLACEHOLDER</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ol>
+                        <li>PLACEHOLDER STEP 1</li>
+                        <li>PLACEHOLDER STEP 2</li>
+                        <li>PLACEHOLDER STEP 3</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="when" aria-labelledby="when-title">
+                <h2 id="when-title">When</h2>
+                <p>PLACEHOLDER TEXT FOR WHEN</p>
+                <div class="grid">
+                    <figure>
+                        <img src="https://placehold.co/900x520/c96f4a/10291f?text=Seasonal+Plan" alt="Placeholder seasonal planting plan">
+                        <figcaption>Placeholder seasonal plan</figcaption>
+                    </figure>
+                    <table>
+                        <caption>Placeholder season guide</caption>
+                        <thead>
+                            <tr>
+                                <th>Season</th>
+                                <th>Task</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PLACEHOLDER</td>
+                                <td>PLACEHOLDER</td>
+                                <td>PLACEHOLDER</td>
+                            </tr>
+                            <tr>
+                                <td>PLACEHOLDER TIME: Morning watering</td>
+                                <td>PLACEHOLDER TIME: Weekly leaf check</td>
+                                <td>PLACEHOLDER TIME: Monthly feeding reminder</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="how" aria-labelledby="how-title">
+                <h2 id="how-title">How</h2>
+                <p>PLACEHOLDER TEXT FOR HOW</p>
+                <div class="grid">
+                    <figure>
+                        <img src="https://placehold.co/900x520/f2c14e/10291f?text=Potting+Demo" alt="Placeholder image of potting demonstration">
+                        <figcaption>Placeholder potting demo</figcaption>
+                    </figure>
+                    <ol>
+                        <li>PLACEHOLDER HOW-TO</li>
+                        <li>PLACEHOLDER HOW-TO</li>
+                        <li>PLACEHOLDER HOW-TO</li>
+                    </ol>
+                    <form aria-label="Placeholder plant care form">
+                        <label for="plant-name">Plant name</label>
+                        <input id="plant-name" name="plant-name" type="text" placeholder="PLACEHOLDER">
+                        <label for="care-question">Care question</label>
+                        <textarea id="care-question" name="care-question" placeholder="PLACEHOLDER"></textarea>
+                        <button type="button">Save placeholder note</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="why" aria-labelledby="why-title">
+            <h2 id="why-title">Why</h2>
+            <p>PLACEHOLDER TEXT: Reflect on why growing plants matters: patience, beauty, food, habitat, and quiet daily ritual.</p>
+            <div class="grid">
+                <figure>
+                <img src="https://placehold.co/900x520/10291f/bfe3cf?text=Why+Grow" alt="Placeholder image representing reasons to grow plants">
+                <figcaption>Placeholder why-grow image</figcaption>
+                <p class="ai-prompt">AI prompt placeholder: “Create a serene botanical illustration symbolizing patience, growth, and care.”</p>
+                </figure>
+                <ul>
+                <li>PLACEHOLDER REASON: Cleaner indoor air and calmer rooms.</li>
+                <li>PLACEHOLDER REASON: Homegrown herbs for simple meals.</li>
+                <li>PLACEHOLDER REASON: A hopeful routine during busy weeks.</li>
+                </ul>
+                <blockquote>
+                <p>PLACEHOLDER QUOTE: “A garden is a promise you water before you see it.”</p>
+                </blockquote>
+            </div>
+            </section>
+    </main>
+
+    <footer>
+        <div class="footer-card">
+        <div class="validators" aria-label="Validation tools">
+            <a href="https://validator.w3.org/#validate_by_input" target="_blank" rel="noopener noreferrer">HTML</a>
+            <a href="https://jigsaw.w3.org/css-validator/#validate_by_input" target="_blank" rel="noopener noreferrer">CSS</a>
+            <a href="https://www.accessibilitychecker.org/" target="_blank" rel="noopener noreferrer">Accessibility</a>
+        </div>
+        <a class="firm" href="https://example.com/design-firm" target="_blank" rel="noopener noreferrer">Designed by Moss &amp; Pixel Studio</a>
+        </div>
+    </footer>
+
+    <script>
+        const links = document.querySelectorAll('nav a[data-section]');
+        const sections = document.querySelectorAll('main section');
+
+        function showSection(id) {
+        sections.forEach((section) => {
+            const isActive = section.id === id;
+            section.classList.toggle('active', isActive);
+            section.setAttribute('aria-hidden', String(!isActive));
+        });
+
+        links.forEach((link) => {
+            const isCurrent = link.dataset.section === id;
+            if (isCurrent) {
+            link.setAttribute('aria-current', 'true');
+            } else {
+            link.removeAttribute('aria-current');
+            }
+        });
+        }
+
+        links.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const id = link.dataset.section;
+            showSection(id);
+            history.replaceState(null, '', `#${id}`);
+        });
+        });
+
+        const initial = location.hash.replace('#', '');
+        if (document.getElementById(initial)) {
+        showSection(initial);
+        }
+    </script>
+</body>
+</html>
