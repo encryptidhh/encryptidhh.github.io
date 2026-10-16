@@ -3,7 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Plant Growing | Hobby Site</title>
+        <!-- Favicon: leaf icon stored in images/ per course requirement -->
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <!-- Title = h1 site name + divider + visible section h2; JS updates it per section -->
+        <title>Verdant Hands | What</title>
+        <!-- Layout note: div elements are used only as grid containers where no semantic element fits;
+             span elements are visual separators, never part of a link. class attributes are styling
+             and JS hooks; id attributes identify SPA sections and pair each section with its h2 via
+             aria-labelledby. Any div/span/class/id use is justified here. -->
         <style>
             :root {
                 --forest: #10291f;
@@ -28,12 +35,18 @@
             body {
                 margin: 0;
                 min-height: 100vh;
-                font-family: Georgia, "Palatino Linotype", serif; /* mideterm req's: no default Times New Roman */
+                font-family: Georgia, "Palatino Linotype", serif; /* body font 1 of 2; no Times New Roman */
                 line-height: 1.65;
                 color: var(--ink);
+                /* Palette: deep forest greens + cream/sun accents; no plain black or white used */
                 background:
                     radial-gradient(circle at top left, rgba(47, 125, 91, .5), transparent 34rem),
                     linear-gradient(145deg, var(--forest), var(--moss) 58%, #0c211a);
+            }
+
+            /* Font 2 of 2: sans-serif for headings, nav, and buttons (contrast with body serif) */
+            h1, h2, nav, button, caption, th {
+                font-family: "Trebuchet MS", Verdana, sans-serif;
             }
 
             a {
@@ -49,13 +62,17 @@
                 outline-offset: .2rem;
             }
 
-            header, footer {
-                width: min(1120px, calc(100% - 2rem));
-                margin-inline: auto;
+            /* Validator requires max-width + margin auto on header, main, and footer */
+            header, main, footer {
+                width: calc(100% - 2rem);
+                max-width: 1120px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             header {
-                padding: 1.5rem 0 1rem;
+                padding-top: 1.5rem;
+                padding-bottom: 1rem;
             }
 
             h1 {
@@ -65,10 +82,10 @@
                 text-transform: uppercase;
             }
 
+            /* Tagline: italicized via <em> in the markup */
             .kicker {
                 margin: .2rem 0 1rem;
                 color: var(--mint);
-                font-style: italic;
             }
 
             nav {
@@ -97,7 +114,7 @@
                 font-weight: 700;
             }
 
-            /* FIXED: dividers are visible separators, not hidden */
+            /* span.divider: plant emoji separators sit outside the links with flex gap spacing */
             .divider {
                 color: var(--mint);
                 font-size: 1.2rem;
@@ -105,11 +122,11 @@
             }
 
             main {
-                width: min(1120px, calc(100% - 2rem));
-                margin: 1.5rem auto 2.5rem;
+                margin-top: 1.5rem;
+                margin-bottom: 2.5rem;
             }
 
-            /* FIXED: base rule hides every section; only .active shows */
+            /* SPA behavior: only the section with .active is displayed */
             section {
                 display: none;
                 padding: clamp(1.2rem, 3vw, 2.4rem);
@@ -131,11 +148,48 @@
                 padding-bottom: .35rem;
             }
 
+            /* div.grid: CSS grid container — no semantic HTML element provides this layout */
             .grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
                 gap: 1rem;
                 align-items: start;
+            }
+
+            /* Keep grid children from overflowing their tracks (fixes misplaced list text) */
+            .grid > * {
+                min-width: 0;
+            }
+
+            /* div.split: two-column layout for What and When — figure on the left (1/3),
+               table + list stacked on the right (2/3); collapses to one column on narrow screens */
+            .split {
+                display: grid;
+                grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
+                gap: 1.5rem;
+                align-items: start;
+            }
+
+            /* div.stack: right-hand column that stacks the table above its list with even spacing */
+            .stack {
+                display: grid;
+                gap: 1.25rem;
+                min-width: 0;
+            }
+
+            .stack ol, .stack ul {
+                margin: 0;
+            }
+
+            @media (max-width: 700px) {
+                .split {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* class .full: wide tables span the whole grid row so lists never get squeezed */
+            .full {
+                grid-column: 1 / -1;
             }
 
             p, li, td, th {
@@ -164,17 +218,15 @@
                 font-weight: 700;
             }
 
-            /* FIXED: restored missing rule so prompts are italicized */
+            /* class .ai-prompt: italicized note inside every figure explaining the AI image prompt */
             .ai-prompt {
                 margin: .45rem 0 0;
                 color: var(--cream);
-                font-style: italic;
             }
 
             table {
                 width: 100%;
                 border-collapse: collapse;
-                overflow: hidden;
                 border-radius: .8rem;
             }
 
@@ -203,6 +255,7 @@
 
             ul, ol {
                 padding-left: 1.25rem;
+                overflow-wrap: break-word;
             }
 
             li + li {
@@ -218,7 +271,6 @@
                 border: 1px solid rgba(242, 193, 78, .35);
             }
 
-            /* FIXED: restored missing form-control rule */
             input, select, textarea, button {
                 width: 100%;
                 font: inherit;
@@ -258,7 +310,7 @@
             }
 
             footer {
-                padding: 0 0 2.5rem;
+                padding-bottom: 2.5rem;
             }
 
             .footer-card {
@@ -299,15 +351,16 @@
 </head>
     <body>
         <header>
-            <h1>Verdant Hands | Plant Growing</h1>
-            <p class="kicker">A hobby site about growing plants, one hopeful leaf at a time.</p>
+            <h1>Verdant Hands</h1>
+            <p class="kicker"><em>A hobby site about growing plants, one hopeful leaf at a time.</em></p>
             <nav aria-label="Hobby sections">
                 <a href="#who" data-section="who">Who</a><span class="divider" aria-hidden="true">🌿</span>
                 <a href="#what" data-section="what" aria-current="true">What</a><span class="divider" aria-hidden="true">🌿</span>
                 <a href="#when" data-section="when">When</a><span class="divider" aria-hidden="true">🌿</span>
                 <a href="#where" data-section="where">Where</a><span class="divider" aria-hidden="true">🌿</span>
                 <a href="#how" data-section="how">How</a><span class="divider" aria-hidden="true">🌿</span>
-                <a href="#why" data-section="why">Why</a>
+                <a href="#why" data-section="why">Why</a><span class="divider" aria-hidden="true">🌿</span>
+                <a href="#prompts" data-section="prompts">AI Prompts</a>
             </nav>
         </header>
 
@@ -320,7 +373,7 @@
                     <figure>
                         <img src="https://placehold.co/900x520/2f7d5b/f7f1df?text=Grower+Portrait" alt="Placeholder portrait of a plant grower">
                         <figcaption>Placeholder grower portrait</figcaption>
-                        <p class="ai-prompt">AI prompt placeholder: “Create a warm editorial portrait of a gardener holding a seedling in soft morning light.”</p>
+                        <em class="ai-prompt">AI prompt used: “Create a warm editorial portrait of a gardener holding a seedling in soft morning light.”</em>
                     </figure>
                     <ul>
                         <li>PLACEHOLDER ITEM 1</li>
@@ -333,82 +386,86 @@
             <section id="what" class="active" aria-labelledby="what-title">
                 <h2 id="what-title">What</h2>
                 <p>PLACEHOLDER TEXT FOR WHAT</p>
-                <div class="grid">
+                <!-- class .split: figure on the left; class .stack: table and steps stacked on the right -->
+                <div class="split">
                     <figure>
                         <img src="https://placehold.co/900x520/173a2c/f2c14e?text=Windowsill+Garden" alt="Placeholder image of a windowsill garden">
                         <figcaption>Placeholder windowsill garden</figcaption>
-                        <p class="ai-prompt">AI prompt placeholder: “Illustrate a cozy windowsill garden with herbs, pothos, and labeled care tags.”</p>
+                        <em class="ai-prompt">AI prompt used: “Illustrate a cozy windowsill garden with herbs, pothos, and labeled care tags.”</em>
                     </figure>
-                    <table>
-                        <caption>Placeholder plant start table</caption>
-                        <thead>
-                            <tr>
-                                <th>Plant</th>
-                                <th>Light</th>
-                                <th>Water</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>PLACEHOLDER</td>
-                                <td>PLACEHOLDER</td>
-                                <td>PLACEHOLDER</td>
-                            </tr>
-                            <tr>
-                                <td>PLACEHOLDER</td>
-                                <td>PLACEHOLDER</td>
-                                <td>PLACEHOLDER</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <ol>
-                        <li>PLACEHOLDER STEP 1</li>
-                        <li>PLACEHOLDER STEP 2</li>
-                        <li>PLACEHOLDER STEP 3</li>
-                    </ol>
+                    <div class="stack">
+                        <table>
+                            <caption>Placeholder plant start table</caption>
+                            <thead>
+                                <tr>
+                                    <th>Plant</th>
+                                    <th>Light</th>
+                                    <th>Water</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PLACEHOLDER</td>
+                                    <td>PLACEHOLDER</td>
+                                    <td>PLACEHOLDER</td>
+                                </tr>
+                                <tr>
+                                    <td>PLACEHOLDER</td>
+                                    <td>PLACEHOLDER</td>
+                                    <td>PLACEHOLDER</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ol>
+                            <li>PLACEHOLDER STEP 1</li>
+                            <li>PLACEHOLDER STEP 2</li>
+                            <li>PLACEHOLDER STEP 3</li>
+                        </ol>
+                    </div>
                 </div>
             </section>
 
             <section id="when" aria-labelledby="when-title">
                 <h2 id="when-title">When</h2>
                 <p>PLACEHOLDER TEXT FOR WHEN</p>
-                <div class="grid">
+                <div class="split">
                     <figure>
                         <img src="https://placehold.co/900x520/c96f4a/10291f?text=Seasonal+Plan" alt="Placeholder seasonal planting plan">
                         <figcaption>Placeholder seasonal plan</figcaption>
-                        <p class="ai-prompt">AI prompt placeholder: “Design a four-season planting calendar poster for herbs and houseplants.”</p>
+                        <em class="ai-prompt">AI prompt used: “Design a four-season planting calendar poster for herbs and houseplants.”</em>
                     </figure>
-                    <table>
-                        <caption>Placeholder season guide</caption>
-                        <thead>
-                            <tr>
-                                <th>Season</th>
-                                <th>Task</th>
-                                <th>Note</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>PLACEHOLDER</td>
-                                <td>PLACEHOLDER</td>
-                                <td>PLACEHOLDER</td>
-                            </tr>
-                            <tr>
-                                <td>PLACEHOLDER</td>
-                                <td>PLACEHOLDER</td>
-                                <td>PLACEHOLDER</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <ul>
-                        <li>PLACEHOLDER TIME: Morning watering</li>
-                        <li>PLACEHOLDER TIME: Weekly leaf check</li>
-                        <li>PLACEHOLDER TIME: Monthly feeding reminder</li>
-                    </ul>
+                    <div class="stack">
+                        <table>
+                            <caption>Placeholder season guide</caption>
+                            <thead>
+                                <tr>
+                                    <th>Season</th>
+                                    <th>Task</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PLACEHOLDER</td>
+                                    <td>PLACEHOLDER</td>
+                                    <td>PLACEHOLDER</td>
+                                </tr>
+                                <tr>
+                                    <td>PLACEHOLDER</td>
+                                    <td>PLACEHOLDER</td>
+                                    <td>PLACEHOLDER</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul>
+                            <li>PLACEHOLDER TIME: Morning watering</li>
+                            <li>PLACEHOLDER TIME: Weekly leaf check</li>
+                            <li>PLACEHOLDER TIME: Monthly feeding reminder</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <!-- FIXED: restored missing Where section -->
             <section id="where" aria-labelledby="where-title">
                 <h2 id="where-title">Where</h2>
                 <p>PLACEHOLDER TEXT FOR WHERE</p>
@@ -416,7 +473,7 @@
                     <figure>
                         <img src="https://placehold.co/900x520/bfe3cf/173a2c?text=Best+Growing+Spot" alt="Placeholder image of a best growing location">
                         <figcaption>Placeholder best growing spot</figcaption>
-                        <p class="ai-prompt">AI prompt placeholder: “Render a bright balcony garden layout with pots arranged by sun exposure.”</p>
+                        <em class="ai-prompt">AI prompt used: “Render a bright balcony garden layout with pots arranged by sun exposure.”</em>
                     </figure>
                     <ul>
                         <li>PLACEHOLDER PLACE: South-facing window</li>
@@ -434,7 +491,7 @@
                     <figure>
                         <img src="https://placehold.co/900x520/f2c14e/10291f?text=Potting+Demo" alt="Placeholder image of potting demonstration">
                         <figcaption>Placeholder potting demo</figcaption>
-                        <p class="ai-prompt">AI prompt placeholder: “Show a step-by-step potting demonstration with soil, perlite, gloves, and a terracotta pot.”</p>
+                        <em class="ai-prompt">AI prompt used: “Show a step-by-step potting demonstration with soil, perlite, gloves, and a terracotta pot.”</em>
                     </figure>
                     <ol>
                         <li>PLACEHOLDER HOW-TO 1</li>
@@ -458,7 +515,7 @@
                     <figure>
                         <img src="https://placehold.co/900x520/10291f/bfe3cf?text=Why+Grow" alt="Placeholder image representing reasons to grow plants">
                         <figcaption>Placeholder why-grow image</figcaption>
-                        <p class="ai-prompt">AI prompt placeholder: “Create a serene botanical illustration symbolizing patience, growth, and care.”</p>
+                        <em class="ai-prompt">AI prompt used: “Create a serene botanical illustration symbolizing patience, growth, and care.”</em>
                     </figure>
                     <ul>
                         <li>PLACEHOLDER REASON: Cleaner indoor air and calmer rooms.</li>
@@ -470,6 +527,59 @@
                     </blockquote>
                 </div>
             </section>
+
+            <!-- AI Prompts section: documents every image prompt used on this site -->
+            <section id="prompts" aria-labelledby="prompts-title">
+                <h2 id="prompts-title">AI Prompts</h2>
+                <p>AI was used only to generate placeholder images; all text on this site is placeholder or original. Each prompt below matches one figure.</p>
+                <table class="full">
+                    <caption>AI image prompts used</caption>
+                    <thead>
+                        <tr>
+                            <th>Section</th>
+                            <th>Figure</th>
+                            <th>Prompt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Who</td>
+                            <td>Grower portrait</td>
+                            <td>“Create a warm editorial portrait of a gardener holding a seedling in soft morning light.”</td>
+                        </tr>
+                        <tr>
+                            <td>What</td>
+                            <td>Windowsill garden</td>
+                            <td>“Illustrate a cozy windowsill garden with herbs, pothos, and labeled care tags.”</td>
+                        </tr>
+                        <tr>
+                            <td>When</td>
+                            <td>Seasonal plan</td>
+                            <td>“Design a four-season planting calendar poster for herbs and houseplants.”</td>
+                        </tr>
+                        <tr>
+                            <td>Where</td>
+                            <td>Best growing spot</td>
+                            <td>“Render a bright balcony garden layout with pots arranged by sun exposure.”</td>
+                        </tr>
+                        <tr>
+                            <td>How</td>
+                            <td>Potting demo</td>
+                            <td>“Show a step-by-step potting demonstration with soil, perlite, gloves, and a terracotta pot.”</td>
+                        </tr>
+                        <tr>
+                            <td>Why</td>
+                            <td>Why grow</td>
+                            <td>“Create a serene botanical illustration symbolizing patience, growth, and care.”</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul>
+                    <li>PLACEHOLDER PROMPT NOTE 1</li>
+                    <li>PLACEHOLDER PROMPT NOTE 2</li>
+                    <li>PLACEHOLDER PROMPT NOTE 3</li>
+                </ul>
+            </section>
         </main>
 
         <footer>
@@ -479,20 +589,30 @@
                     <a href="https://jigsaw.w3.org/css-validator/#validate_by_input" target="_blank" rel="noopener noreferrer">CSS</a>
                     <a href="https://www.accessibilitychecker.org/" target="_blank" rel="noopener noreferrer">Accessibility</a>
                 </div>
-                <a class="firm" href="https://example.com/design-firm" target="_blank" rel="noopener noreferrer">Designed by Moss &amp; Pixel Studio</a>
+                <!-- Firm link is relative (same site), so it must not open a new tab -->
+                <a class="firm" href="../moss-and-pixel/">Designed by Moss &amp; Pixel Studio</a>
             </div>
         </footer>
 
         <script>
             const links = document.querySelectorAll('nav a[data-section]');
             const sections = document.querySelectorAll('main section');
+            const siteName = document.querySelector('h1').textContent.trim();
 
             function showSection(id) {
+                let pageName = 'What';
+
                 sections.forEach((section) => {
                     const isActive = section.id === id;
                     section.classList.toggle('active', isActive);
                     section.setAttribute('aria-hidden', String(!isActive));
+                    if (isActive) {
+                        pageName = section.querySelector('h2').textContent.trim();
+                    }
                 });
+
+                // Course rule: title = h1 (site name) + divider + visible section's h2
+                document.title = siteName + ' | ' + pageName;
 
                 links.forEach((link) => {
                     const isCurrent = link.dataset.section === id;
@@ -509,7 +629,7 @@
                     event.preventDefault();
                     const id = link.dataset.section;
                     showSection(id);
-                    history.replaceState(null, '', `#${id}`);
+                    history.replaceState(null, '', '#' + id);
                 });
             });
 
