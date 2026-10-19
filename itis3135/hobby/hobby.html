@@ -45,7 +45,7 @@
             }
 
             /* Font 2 of 2: sans-serif for headings, nav, and buttons (contrast with body serif) */
-            h1, h2, nav, button, caption, th {
+            nav, button, caption, th {
                 font-family: "Trebuchet MS", Verdana, sans-serif;
             }
 
@@ -76,6 +76,7 @@
             }
 
             h1 {
+                font-family: "Trebuchet MS", Verdana, sans-serif;
                 margin: 0;
                 font-size: clamp(2rem, 4vw, 3.4rem);
                 letter-spacing: .04em;
@@ -136,11 +137,12 @@
                 box-shadow: 0 1.2rem 3rem var(--shadow);
             }
 
-            section.active {
+            .active {
                 display: block;
             }
 
             h2 {
+                font-family: "Trebuchet MS", Verdana, sans-serif;
                 margin-top: 0;
                 color: var(--mint);
                 font-size: clamp(1.6rem, 3vw, 2.3rem);
@@ -157,7 +159,7 @@
             }
 
             /* Keep grid children from overflowing their tracks (fixes misplaced list text) */
-            .grid > * {
+            .grid figure, .grid p, .grid ul, .grid ol {
                 min-width: 0;
             }
 
@@ -272,7 +274,7 @@
             }
 
             input, select, textarea, button {
-                width: 100%;
+                box-sizing: border-box;
                 font: inherit;
                 color: var(--ink);
                 background: rgba(16, 41, 31, .75);
@@ -344,7 +346,6 @@
 
             @media (prefers-reduced-motion: reduce) {
                 html { scroll-behavior: auto; }
-                * { transition: none !important; animation: none !important; }
             }
         </style>
     <base target="_blank">
@@ -372,9 +373,9 @@
                 <p>A reflection on gardening and the people who do it.</p>
                 <div class="grid">
                     <figure>
-                        <img src="images/pexels-shelei-assuncao-1848675893-29738899-Who.jpg" length="100" width="100" alt="Placeholder portrait of a plant grower">
+                        <img src="images/pexels-shelei-assuncao-1848675893-29738899-Who.jpg" width="100" height="100" alt="Placeholder portrait of a plant grower">
                         <figcaption>A rural farmer</figcaption>
-                        <em class="ai-prompt">Photo taken by Shelei Assunção (Instagram: @sheleiphoto)</em>
+                        <p><em class="ai-prompt">Photo taken by Shelei Assunção (Instagram: @sheleiphoto)</em></p>
                     </figure>
                     <p>
                         Have you ever had a hobby that you thought sounds nice but not really your cup of tea? 
@@ -406,7 +407,7 @@
                     <figure>
                         <img src="images/Windowsil-What.jpg" alt="A begonia plant with pink flowers">
                         <figcaption>A begonia plant with pink flowers, growing on a windowsill</figcaption>
-                        <em class="ai-prompt">No AI prompts used for images :P</em>
+                        <p><em class="ai-prompt">No AI prompts used for images :P</em></p>
                     </figure>
                     <div class="stack">
                         <table>
@@ -447,7 +448,7 @@
                     <figure>
                         <img src="images/Green-Peppers-When.jpg" alt="Green bell pepper growing">
                         <figcaption>A large, green bell pepper</figcaption>
-                        <em class="ai-prompt">No AI prompts used for images! :D</em>
+                        <p><em class="ai-prompt">No AI prompts used for images! :D</em></p>
                     </figure>
                     <div class="stack">
                         <table>
@@ -496,7 +497,7 @@
                     <figure>
                         <img src="images/Big-Plants-Where.jpeg" alt="Begonias growing facing a window">
                         <figcaption>More begonias growing on a windowsill</figcaption>
-                        <em class="ai-prompt">Again, no AI images</em>
+                        <p><em class="ai-prompt">Again, no AI images</em></p>
                     </figure>
                     <ul>
                         <li>South-facing window: Best for providing strong, direct light. 
@@ -519,7 +520,7 @@
                     <figure>
                         <img src="images/Small-Plant-Why.jpg" alt="A very small bell pepper">
                         <figcaption>More bell peppers!</figcaption>
-                        <em class="ai-prompt">No AI for images.</em>
+                        <p><em class="ai-prompt">No AI for images.</em></p>
                     </figure>
                     <ul>
                         <li>Planting:
@@ -555,7 +556,7 @@
                     <figure>
                         <img src="images/Outside-Plants-How-1.jpg" alt="Placeholder image representing reasons to grow plants">
                         <figcaption>Basil plants growing in a garden patch</figcaption>
-                        <em class="ai-prompt">Still no AI image prompts, brochacho.</em>
+                        <p><em class="ai-prompt">Still no AI image prompts, brochacho.</em></p>
                     </figure>
                     <ul>
                         <li>They Grow! - It's fun to see then grow from a seed, to a leaf, then two, then flowers.</li>
@@ -653,7 +654,7 @@
 
         <footer>
             <div class="footer-card">
-                <div class="validators" aria-label="Validation tools">
+                <div class="validators" role="group" aria-label="Validation tools">
                     <a href="https://validator.w3.org/#validate_by_input" target="_blank" rel="noopener noreferrer">HTML</a>
                     <a href="https://jigsaw.w3.org/css-validator/#validate_by_input" target="_blank" rel="noopener noreferrer">CSS</a>
                     <a href="https://www.accessibilitychecker.org/" target="_blank" rel="noopener noreferrer">Accessibility</a>
