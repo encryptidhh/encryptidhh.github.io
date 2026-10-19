@@ -153,14 +153,14 @@
             /* div.grid: CSS grid container — no semantic HTML element provides this layout */
             .grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 1rem;
+                grid-template-columns: minmax(240px, 1fr) minmax(0, 1fr);
+                gap: 1em;
                 align-items: start;
             }
 
             /* Keep grid children from overflowing their tracks (fixes misplaced list text) */
             .grid figure, .grid p, .grid ul, .grid ol {
-                min-width: 0;
+                min-width: 0px;
             }
 
             /* div.split: two-column layout for What and When — figure on the left (1/3),
@@ -184,7 +184,7 @@
             }
 
             @media (max-width: 700px) {
-                .split {
+                .grid, .split {
                     grid-template-columns: 1fr;
                 }
             }
@@ -373,7 +373,7 @@
                 <p>A reflection on gardening and the people who do it.</p>
                 <div class="grid">
                     <figure>
-                        <img src="images/pexels-shelei-assuncao-1848675893-29738899-Who.jpg" alt="Placeholder portrait of a plant grower">
+                        <img src="images/pexels-shelei-assuncao-Who-1.jpg" alt="Placeholder portrait of a plant grower">
                         <figcaption><em>Photo taken by Shelei Assunção (Instagram: @sheleiphoto)</em></figcaption>
                     </figure>
                     <p>
@@ -404,7 +404,7 @@
                 <!-- class .split: figure on the left; class .stack: table and steps stacked on the right -->
                 <div class="split">
                     <figure>
-                        <img src="images/Windowsil-What.jpg" alt="A begonia plant with pink flowers">
+                        <img src="images/Windowsil-What-1.jpg" alt="A begonia plant with pink flowers">
                         <figcaption><em>A begonia plant with pink flowers, growing on a windowsill</em></figcaption>
                     </figure>
                     <div class="stack">
@@ -444,7 +444,7 @@
                 <p>A sample growing schedule for a USDA Zone 8 climate (most of NC). Source: Farmer's Almanac</p>
                 <div class="split">
                     <figure>
-                        <img src="images/Green-Peppers-When.jpg" alt="Green bell pepper growing">
+                        <img src="images/Green-Peppers-When-1.jpg" alt="Green bell pepper growing">
                         <figcaption><em>A large, green bell pepper</em></figcaption>
                     </figure>
                     <div class="stack">
@@ -492,7 +492,7 @@
                 <p>Different areas for growing. Sources: Pella.com, HarvestByHillwood, OneNewHumanityCDC</p>
                 <div class="grid">
                     <figure>
-                        <img src="images/Big-Plants-Where.jpeg" alt="Begonias growing facing a window">
+                        <img src="images/Big-Plants-Where-1.jpeg" alt="Begonias growing facing a window">
                         <figcaption><em>More begonias growing on a windowsill</em></figcaption>
                     </figure>
                     <ul>
@@ -549,7 +549,7 @@
                 <p>Some reasons for why gardening is fun! Source: My sister</p>
                 <div class="grid">
                     <figure>
-                        <img src="images/Outside-Plants-How-1.jpg" alt="Placeholder image representing reasons to grow plants">
+                        <img src="images/Outside-Plants-How-3.jpg" alt="Placeholder image representing reasons to grow plants">
                         <figcaption><em>Basil plants growing in a garden patch</em></figcaption>
                     </figure>
                     <ul>
