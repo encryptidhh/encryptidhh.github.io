@@ -160,7 +160,9 @@
 
             /* Keep grid children from overflowing their tracks (fixes misplaced list text) */
             .grid > * {
-                flex: 1 1 15rem;
+                flex-grow: 1;
+                flex-shrink: 1;
+                flex-basis: 15rem;
                 min-width: 0;
             }
 
