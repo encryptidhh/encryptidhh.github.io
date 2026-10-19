@@ -6,7 +6,7 @@
         <!-- Favicon: leaf icon stored in images/ per course requirement -->
         <link rel="icon" type="image/png" href="images/hobby-favicon.ico">
         <!-- Title = h1 site name + divider + visible section h2; JS updates it per section -->
-        <title>Verdant Hands</title>
+        <title>Verdant Hands | What Plants Should I Grow?</title>
         <!-- Layout note: div elements are used only as grid containers where no semantic element fits;
              span elements are visual separators, never part of a link. class attributes are styling
              and JS hooks; id attributes identify SPA sections and pair each section with its h2 via
@@ -616,7 +616,7 @@
                     <br>
                     <br>
                     This will be a long tangent, but bear with me. I'm sure there's a movie, TV show, song, or book 
-                    you can relate to a lot. For me, that's Fullmetal Alchemist: Brotherhood. That anime changed the way I think. 
+                    you can relate to a lot. For me, that's Fullmetal Alchemist: Brotherhood. That anime changed the way I think. 
                     If you haven't seen FMAB, the show follows two brothers: Edward and Alphonse Elric. Abandoned by their father 
                     and following the death of their mother, the two try to revive their mother through the "science" (read: magic) 
                     of alchemy - which allows you to transfer matter from one form to another, like changing a marble tile into a handy spear. 
@@ -665,7 +665,7 @@
             const siteName = document.querySelector('h1').textContent.trim();
 
             function showSection(id) {
-                let pageName = 'What';
+                let pageName = 'What Plants Should I Grow?';
 
                 sections.forEach((section) => {
                     const isActive = section.id === id;
@@ -699,8 +699,10 @@
             });
 
             const initial = location.hash.replace('#', '');
-            if (document.getElementById(initial)) {
+            if (initial && document.getElementById(initial)) {
                 showSection(initial);
+            } else {
+                showSection('what');
             }
         </script>
         <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
