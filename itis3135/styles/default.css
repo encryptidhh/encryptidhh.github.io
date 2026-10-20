@@ -1,63 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  /* One shared side padding so h1, nav, main and footer text all line up.
+     It shrinks smoothly from 20px (desktop) to 12px (small phones). */
+  --pad: clamp(12px, 4vw, 20px);
+}
+
+* { box-sizing: border-box; }   /* makes padding+border behave predictably */
+
+body {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ---------- Header: h1 (in each page) + shared nav (components/header.html) ---------- */
+
+/* The h1 spans the full width so its blue band meets the header's blue band,
+   but its text is padded to sit in the same 700px column as everything else. */
+h1 {
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 0;
+  padding-left: max(var(--pad), calc((100% - 700px) / 2 + var(--pad)));
+  padding-right: max(var(--pad), calc((100% - 700px) / 2 + var(--pad)));
+  color: #F5F5F5; /* I like this white*/
+  background-color: #3C4E68;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.4rem, 5vw, 2rem);   /* shrinks smoothly with the screen */
+  overflow-wrap: break-word;
+}
+
+header {
+  color: #b1bfb4; /* I like this ash gray color */
+  background-color: #3C4E68;
+}
+
+header nav {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 12px var(--pad) 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---------- Main content ---------- */
+
 .content-block {
   max-width: 700px;           /* keeps text readable, centers like your screenshot */
   margin: 20px auto;          /* center the module, space between modules */
-  padding: 20px;
+  padding: var(--pad);
   font-family: 'Inter', 'Courier New', sans-serif;
 }
 
 .content-block p {
-  font-size: 14px;
+  font-size: clamp(14px, 2.5vw, 16px);
 }
 
-
-.header {
-  color: #F5F5F5; /* I like this white color */
-  background-color: #3C4E68;
+.figure {
+  display: block;
+  max-width: 100%;   /* never overflow its container */
+  height: auto;      /* keeps the photo's proportions when it shrinks */
 }
 
-h1 {
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 700px;
-  font-family: 'Space Grotesk', sans-serif;  
+.div-line {
+  border: 0;
+  border-top: 1px solid #3C4E68;   /* replaces the default grey line with the header blue */
 }
 
+/* ---------- Footer (components/footer.html) ---------- */
 
-.header p {
-  padding-left: 20px;
-  padding-right: 20px; 
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 700px;
-  font-family: 'Inter', sans-serif;
-}
-
-.header nav {
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 700px;
-  font-family: 'Inter', sans-serif;
-}
-
-/* The footer is injected after <main> by include_components.js, so it no longer
-   inherits .content-block. These rules give it the same width, centering, padding,
-   font, and text size as the main content. */
+/* Same width, centering and side padding as .content-block,
+   so the footer text lines up with the main text. */
 footer {
   max-width: 700px;
-  margin: 20px auto;
-  padding: 20px;
-  font-family: 'Inter', 'Courier New', sans-serif;
+  margin: 0 auto 20px;
+  padding: 0 var(--pad) 20px;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
+  overflow-wrap: anywhere;   /* long links wrap instead of overflowing */
 }
 
 footer p {
-  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* ---------- Links ---------- */
+
+a:active {
+  color: #F2AF29;
 }
 
 a:link {
@@ -68,23 +98,12 @@ a:visited {
   color: #F2AF29;
 }
 
-body {
-  max-width: 100%;
-  margin: 0 auto;
-}
+nav { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
+nav a { padding: 4px 2px; }   /* bigger tap targets on phones */
+
+/* ---------- Small screens ---------- */
 
 @media (max-width: 600px) {
-  body {
-    padding: 0 12px;
-  }
+  header nav { gap: 8px; padding-bottom: 16px; }
 }
-
-* { box-sizing: border-box; }   /* makes padding+border behave predictably */ 
-
-
-.figure {
-  max-width: 100%;   /* never overflow its container */ 
-}
-
-nav { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
