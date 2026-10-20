@@ -45,6 +45,21 @@ h1 {
   font-family: 'Inter', sans-serif;
 }
 
+/* The footer is injected after <main> by include_components.js, so it no longer
+   inherits .content-block. These rules give it the same width, centering, padding,
+   font, and text size as the main content. */
+footer {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Inter', 'Courier New', sans-serif;
+  font-size: 14px;
+}
+
+footer p {
+  font-size: 14px;
+}
+
 a:link {
   color: #F2AF29;
 }
