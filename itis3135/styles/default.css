@@ -43,6 +43,11 @@ header nav {
   font-family: 'Inter', sans-serif;
 }
 
+header img {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 12px var(--pad) 20px;
+}
 /* ---------- Main content ---------- */
 
 .content-block {
