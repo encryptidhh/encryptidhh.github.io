@@ -3,112 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/h-key-favicon-1.ico">
+    <link rel="stylesheet" href="styles/default.css">
+    <title>Hanniel Holness's Honorable Hummingbird | ITIS3135 | Product</title>
     <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
-    <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
-    <link rel="stylesheet" href="styles/product.css">
-    <title>Build a Product Landing Page | FCC Project</title>
 </head>
 <body>
-    <div data-include="components/header.html"></div>
-  <header id="header">
-    <img
-      id="header-img"
-      src="https://i.imgur.com/pG7JJzT.png"
-      alt="TerraGlow logo"
-    />
+  <!-- The ids on header, header-img and nav-bar are required by the Product Landing Page
+       user stories so tests (and the CSS) can find these elements. The-->
+       
+       
+  <!--div data-include marks produces the default header-->
+  <div data-include="components/header.html"></div>
+
+  <!-- main uses the class content-block from default.css to constrain width and center content.
+       Each section has an id so the nav links above have something to jump to. -->
+  <main class="content-block">
+    <!--nav element with id "nav-bar" used to jump to headings in the product page.-->
+    <h2>Product</h2>
+    <nav>
+      <a href="hobby/index.html">Hobby (Midterm Site)</a>
+    </nav>
     <nav id="nav-bar">
       <a class="nav-link" href="#features">Features</a>
       <a class="nav-link" href="#how-it-works">How It Works</a>
-      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#sign-up">Sign Up</a>
     </nav>
-  </header>
-
-  <main>
-    <section id="hero">
-      <h1>Meet <span class="accent">TerraGlow</span></h1>
-      <p>The planter that waters itself — and keeps your plants thriving even when you forget they exist.</p>
-    </section>
-
     <section id="features">
-      <h2>Why You'll Love It</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>🌱 Self-Watering Reservoir</h3>
-          <p>A 2-week water supply drawn up by natural capillary action. No pumps, no noise.</p>
-        </div>
-        <div class="feature-card">
-          <h3>💡 Grow Light Ring</h3>
-          <p>A built-in full-spectrum LED ring gives your plants the light they crave, dawn to dusk.</p>
-        </div>
-        <div class="feature-card">
-          <h3>📱 Smart Alerts</h3>
-          <p>The companion app nudges you only when it truly matters — refills, low light, repotting.</p>
-        </div>
-      </div>
+      <h3>Features</h3>
+      <img class="figure" width="500" height="455" src="images/hummingbird-promo-image-2.png" alt="Hummingbird feeding at a garden feeder">
+      <p>The Hover Feeder is a nectar feeder built for backyard hummingbirds. It is easy to fill, easy to clean, and sized for small gardens and balconies.</p>
+      <ul>
+        <li>Wide-mouth top that fills without spills</li>
+        <li>Bright red ports that draw hummingbirds in</li>
+        <li>Pieces that come apart for a quick wash</li>
+      </ul>
     </section>
 
     <section id="how-it-works">
-      <h2>See It In Action</h2>
-      <iframe
-        id="video"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        title="TerraGlow product demo"
-        allowfullscreen
-      ></iframe>
+      <h3>How It Works</h3>
+      <p>Fill it with nectar, hang it in the shade, and watch the birds arrive. This short video walks through setup from start to finish.</p>
+      <img class="figure" width="500" height="455" src="images/hummingbird-promo-video.gif" alt="Hummingbird feeding at a garden feeder">
     </section>
-
-    <section id="pricing">
-      <h2>Choose Your TerraGlow</h2>
-      <div class="pricing-grid">
-        <div class="price-card">
-          <h3>Sprout</h3>
-          <p class="price">$39</p>
-          <ul>
-            <li>500ml reservoir</li>
-            <li>2 LED tones</li>
-          </ul>
-        </div>
-        <div class="price-card featured">
-          <h3>Bloom</h3>
-          <p class="price">$59</p>
-          <ul>
-            <li>1L reservoir</li>
-            <li>Full-spectrum LEDs</li>
-            <li>App connectivity</li>
-          </ul>
-        </div>
-        <div class="price-card">
-          <h3>Grove</h3>
-          <p class="price">$89</p>
-          <ul>
-            <li>Dual planter</li>
-            <li>All Bloom features</li>
-            <li>Mist attachment</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="signup">
-      <h2>Get Early Access</h2>
-      <p>Join the waitlist and get 20% off at launch.</p>
-      <form id="form" action="https://www.freecodecamp.org/email-submit">
-        <input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="Enter your email address"
-          required
-        />
-        <input id="submit" type="submit" value="Join Waitlist" />
+    
+    <section id="sign-up">
+      <h3>Get Early Access</h3>
+      <p>Join the email list and we will let you know when the Hover Feeder is ready.</p>
+      <form id="form" action="https://www.freecodecamp.org/email-submit" method="post">
+        <label for="email">Email address:</label>
+        <input id="email" type="email" name="email" placeholder="you@example.com" required>
+        <input id="submit" type="submit" value="Join the List">
       </form>
     </section>
   </main>
 
-  <footer id="footer">
-    <p>© 2026 TerraGlow. Grow happier.</p>
-  </footer>
-  <div include="components/footer.html"></div>
+  <!-- div used only to include the shared footer component -->
+  <div data-include="components/footer.html"></div>
   <script src="scripts/HTMLInclude.min.js"></script>
+  <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
 </body>
 </html>
