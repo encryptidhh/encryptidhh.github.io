@@ -132,7 +132,7 @@ footer p {
 /* ---------- Links ---------- */
 
 a:active, a:link, a:visited {
-  color: #F2AF29;
+  color: #a65e47;
 }
 
 nav { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
