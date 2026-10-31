@@ -64,7 +64,7 @@ blockquote p {
 }
 
 header {
-  color: #b1bfb4; /* I like this ash gray color */
+  color: #b1bfb4; 
   background-color: #3C4E68;
 }
 
@@ -275,4 +275,114 @@ span[class~="three"] span {
   /* drop-shadow follows the card's rounded corners (box-shadow would be rectangular).
      Its blur is half of box-shadow's, so 10px here matches the old 20px blur. */
   filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.45));
+}
+/* ---------- Image scaling demos (pictures.html) ----------
+   Each class overrides the width/height attributes on the <img>, which stay in the HTML. */
+
+/* proportional: both dimensions scaled together, so the aspect ratio is kept */
+.scale-40 { width: 40%; height: 40%; }
+.scale-50 { width: 50%; height: 50%; }
+
+/* improper: width changes but height stays at the attribute value, so the image distorts */
+.width-40 { width: 40%; }
+.width-125 { width: 125%; }
+
+
+/* Form and generated-output styling; colors and fonts come from default.css */
+[hidden] { display: none; }
+
+#intro-form fieldset {
+    margin: 0 0 1rem;
+    padding: 0.75rem 1rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+}
+#intro-form legend {
+    padding: 0 0.4rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: #3C4E68;
+}
+/* A one-column grid makes the label and its input fill the row without setting a width on the input */
+.field { display: grid; grid-template-columns: minmax(0, 1fr); margin-bottom: 0.6rem; }
+.field label { display: block; margin-bottom: 0.2rem; font-weight: 600; }
+.field-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0 0.75rem;
+}
+
+#intro-form input[type="text"],
+#intro-form input[type="url"],
+#intro-form input[type="file"],
+#intro-form textarea,
+#output textarea {
+    min-width: 0;   /* lets the control shrink with its grid cell instead of overflowing */
+    padding: 0.45rem 0.6rem;
+    color: var(--ink);
+    background: #f4f0eb; 
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+}
+#intro-form textarea { resize: vertical; }
+#photo-preview { height: auto; margin-bottom: 0.6rem; border-radius: 4px; }
+
+.course-list { padding-left: 1.5rem; }
+.course-group {
+    display: grid;
+    grid-template-columns: 5rem 5rem 1.2fr 2fr auto;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+button {
+    padding: 0.5rem 1.1rem;
+    color: #F5F5F5;
+    background: #3C4E68;
+    border: 1px solid #3C4E68;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button[type="reset"], #clear, .delete-course {
+    color: #3C4E68;
+    background: transparent;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible {
+    outline: 2px solid #3C4E68;
+    outline-offset: 2px;
+}
+.button-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+#output textarea { min-height: 14rem; font-family: monospace; font-size: 0.85rem; white-space: pre; }
+.output-block { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: 1rem; }
+.profile-links { text-align: center; }
+
+@media (max-width: 600px) {
+    .course-group { grid-template-columns: 1fr 1fr; }
+    .course-group input:nth-child(n+3) { grid-column: 1 / -1; }
+}
+
+/* ---------- File upload button ----------
+   ::file-selector-button is the "Choose file" button inside <input type="file">.
+   It is not a real <button>, so the button rules above don't reach it. */
+input[type="file"] {
+  color: var(--ink-soft);   /* the "No file chosen" text */
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 2.5vw, 16px);
+  color: #F5F5F5;
+  background-color: #3C4E68;
+  border: 1px solid #3C4E68;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #2f3d52;
 }

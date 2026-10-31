@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/h-key-favicon-1.ico">
+    <link rel="stylesheet" href="styles/default.css">
+    <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
+    <title>Hanniel Holness's Honorable Hummingbird | ITIS3135 | Introduction Form</title>
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- div used to include the shared header component -->
+  <div data-include="components/header.html"></div>
+  <!-- main element with class content-block used to constrain page width and center content -->
+  <main class="content-block">
+    <h2>Introduction Form</h2>
+    <h3 id="form-heading">Please Submit The Form Below.</h3>
+
+    <form id="intro-form">
+      <fieldset>
+        <legend>Name</legend>
+        <div class="field-row">
+          <div class="field"><label for="first-name">First name</label>
+            <input type="text" id="first-name" name="firstName" value="Hanniel" placeholder="First name" autocomplete="given-name" required></div>
+          <div class="field"><label for="middle-initial">Middle initial (optional)</label>
+            <input type="text" id="middle-initial" name="middleInitial" value="F" placeholder="Middle initial" maxlength="1" pattern="[A-Za-z]" title="One letter"></div>
+          <div class="field"><label for="nickname">Nickname (optional)</label>
+            <input type="text" id="nickname" name="nickname" value="" placeholder="Nickname"></div>
+          <div class="field"><label for="last-name">Last name</label>
+            <input type="text" id="last-name" name="lastName" value="Holness" placeholder="Last name" autocomplete="family-name" required></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Public acknowledgment</legend>
+        <div class="field"><label for="ack-statement">Acknowledgment statement</label>
+          <input type="text" id="ack-statement" name="acknowledgment" value="I understand that this is a public document, and I won’t put anything here I wouldn’t want anyone to see" placeholder="Statement that this post is public" required></div>
+        <div class="field"><label for="ack-date">Date (MM/DD/YYYY)</label>
+          <input type="text" id="ack-date" name="date" value="08/18/2026" placeholder="MM/DD/YYYY" maxlength="10" autocomplete="off" required></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Display name and mascot</legend>
+        <div class="field-row">
+          <div class="field"><label for="mascot-adjective">Mascot adjective</label>
+            <input type="text" id="mascot-adjective" name="mascotAdjective" value="Honorable" placeholder="Adjective" required></div>
+          <div class="field"><label for="mascot-animal">Mascot animal</label>
+            <input type="text" id="mascot-animal" name="mascotAnimal" value="Hummingbird" placeholder="Animal" required></div>
+          <div class="field"><label for="divider">Divider symbol</label>
+            <input type="text" id="divider" name="divider" value="|" placeholder="| or ~ or *" maxlength="1" required></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Picture</legend>
+        <img id="photo-preview" class="figure" src="images/red-hand-mirror-selfie.png" width="150" height="200" alt="Current introduction photo">
+        <div class="field"><label for="photo">Upload a different picture (optional)</label>
+          <input type="file" id="photo" name="photo" accept="image/*"></div>
+        <div class="field"><label for="caption">Picture caption</label>
+          <input type="text" id="caption" name="caption" value="Me on one random day in May" placeholder="Short caption" required></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Personal statement</legend>
+        <div class="field"><label for="statement">Personal statement (at least 3 sentences)</label>
+          <textarea id="statement" name="statement" rows="5" placeholder="Tell us about yourself" required>Hi, my name is Hanniel Holness. I’m 21 years old, and a senior at UNCC, majoring in computer science. I’m a transfer student, having earned an Associate’s Degree before coming to Charlotte. I specialize in cybersecurity, so I’m aiming for an industry job that focuses on that after graduation.</textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Background</legend>
+        <div class="field"><label for="personal-bg">Personal Background</label>
+          <textarea id="personal-bg" name="personalBackground" rows="2" placeholder="2-3 sentences" required>I moved to NC from the UK 4 years ago.</textarea></div>
+        <div class="field"><label for="professional-bg">Professional Background</label>
+          <textarea id="professional-bg" name="professionalBackground" rows="2" placeholder="2-3 sentences" required>I took an internship while at community college. I’m also working two jobs, including as an Instructional Assistant.</textarea></div>
+        <div class="field"><label for="academic-bg">Academic Background</label>
+          <textarea id="academic-bg" name="academicBackground" rows="3" placeholder="Major, year, and academic path" required>I have an Associates in Science degree. I’m also an early entry student for the Masters in Cybersecurity program (i.e., taking graduate and undergraduate courses at the same time).</textarea></div>
+        <div class="field"><label for="web-bg">Background in this Course’s Material (optional)</label>
+          <textarea id="web-bg" name="webBackground" rows="2" placeholder="Your background in web development, if any"></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Primary Work Computer</legend>
+        <div class="field-row">
+          <div class="field"><label for="manufacturer">Manufacturer</label>
+            <input type="text" id="manufacturer" name="manufacturer" value="HP" placeholder="Manufacturer" required></div>
+          <div class="field"><label for="device-type">Device type</label>
+            <input type="text" id="device-type" name="deviceType" value="ENVY 15.6” x360 2-in-1 Laptop" placeholder="Device type" required></div>
+          <div class="field"><label for="os">Operating system</label>
+            <input type="text" id="os" name="operatingSystem" value="Microsoft Windows 11" placeholder="Operating system" required></div>
+          <div class="field"><label for="os-version">Version</label>
+            <input type="text" id="os-version" name="osVersion" value="25H2" placeholder="Version" required></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Work location</legend>
+        <div class="field"><label for="work-location">Primary Work Location</label>
+          <input type="text" id="work-location" name="workLocation" value="Home, or the library" placeholder="Where you normally work" required></div>
+        <div class="field"><label for="alternate">Alternate Computer &amp; Location</label>
+          <textarea id="alternate" name="alternate" rows="2" placeholder="What you would do if you couldn’t use your primary computer or location" required>Using a computer from the library.</textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Courses I’m taking &amp; Why</legend>
+        <ol id="courses" class="course-list"></ol>
+        <button type="button" id="add-course">Add course</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Favorite quote</legend>
+        <div class="field"><label for="quote-text">Quote (without quotation marks)</label>
+          <input type="text" id="quote-text" name="quote" value="Just know that the earth is just a rock without the voices of art" placeholder="Your favorite quote" required></div>
+        <div class="field"><label for="quote-author">Author</label>
+          <input type="text" id="quote-author" name="quoteAuthor" value="Kendrick Lamar (Pray, unreleased track)" placeholder="Who said it" required></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Optional extras</legend>
+        <div class="field"><label for="funny-item">Funny/Interesting Item to Remember Me by (optional)</label>
+          <textarea id="funny-item" name="funnyItem" rows="2" placeholder="Leave blank to leave this bullet out"></textarea></div>
+        <div class="field"><label for="also-share">I’d Also Like to Share (optional)</label>
+          <textarea id="also-share" name="alsoShare" rows="2" placeholder="Leave blank to leave this bullet out"></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Footer links</legend>
+        <div class="field"><label for="link-clt">CLT Web</label>
+          <input type="url" id="link-clt" class="link-input" data-name="CLT Web" value="https://webpages.charlotte.edu/hholnes1" placeholder="https://webpages.charlotte.edu/your-username" required></div>
+        <div class="field"><label for="link-ghio">GitHub.io</label>
+          <input type="url" id="link-ghio" class="link-input" data-name="GitHub.io" value="https://encryptidhh.github.io/" placeholder="https://your-username.github.io/" required></div>
+        <div class="field"><label for="link-gh">GitHub</label>
+          <input type="url" id="link-gh" class="link-input" data-name="GitHub" value="https://github.com/encryptidhh" placeholder="https://github.com/your-username" required></div>
+        <div class="field"><label for="link-fcc">freeCodeCamp</label>
+          <input type="url" id="link-fcc" class="link-input" data-name="freeCodeCamp" value="https://www.freecodecamp.org/codinges" placeholder="https://www.freecodecamp.org/your-username" required></div>
+        <div class="field"><label for="link-cc">Codecademy</label>
+          <input type="url" id="link-cc" class="link-input" data-name="Codecademy" value="https://www.codecademy.com/@hannielHolness5213116756" placeholder="https://www.codecademy.com/profiles/your-username" required></div>
+        <div class="field"><label for="link-li">LinkedIn</label>
+          <input type="url" id="link-li" class="link-input" data-name="LinkedIn" value="https://www.linkedin.com/in/hanniel-holness/" placeholder="https://www.linkedin.com/in/your-username" required></div>
+      </fieldset>
+
+      <p class="button-row">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+        <button type="button" id="clear">Clear</button>
+      </p>
+    </form>
+
+    <!-- The built introduction replaces the form here after Submit -->
+    <div id="result" hidden></div>
+
+    <p class="button-row">
+      <button type="button" id="gen-html">Generate HTML</button>
+      <button type="button" id="gen-json">Generate JSON</button>
+      <button type="button" id="gen-xml">Generate XML</button>
+    </p>
+    <div id="output"></div>
+
+    <div data-include="components/footer.html"></div>
+    <script src="scripts/HTMLInclude.min.js"></script>
+    <script src="scripts/introduction.js"></script>
+  </main>
+</body>
+</html>

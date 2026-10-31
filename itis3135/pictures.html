@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/h-key-favicon-1.ico">
+    <script src="https://divonbriesen.github.io/teaching/tools/standards-check.js" defer></script>
+    <link rel="stylesheet" href="styles/default.css">
+    <title>Hanniel Holness's Honorable Hummingbird | ITIS3135 | Pictures</title>
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- div used to include the shared header component -->
+  <div data-include="components/header.html"></div>
+  <!-- main element with class content-block used to constrain page width and center content -->
+  <main class="content-block">
+    <h2>Pictures</h2>
+    <p>
+      This is an assignment where student select multiple images and place them into a webpage
+      to experience how images relate to the web and web development.
+    </p>
+    <section>
+      <h3>Explanation</h3>
+      <p>
+        This picture was taken by Dennise Anorico (<strong>@dennise_the_menace</strong> on Instagram),
+        and sourced from Pexels. I picked this image because it meets the exact dimensions 
+        specified in the assignment (5000x3000), and has a lot of small details; 
+        CSS image manipulation would be obvious. Here's the original image, shrunk to 500x300 pixels for better viewing:
+      </p>
+      <figure>
+        <img src="images/beach@dennise_anorico_pexels.jpg" alt="An image of a seashore" width="500" height="300">
+      </figure>
+      <article>
+        <h4>Pexels Image Versions</h4>
+        <p><a href="images/beach@dennise_anorico_pexels.jpg">Original Image</a></p>
+        <p><a href="images/beach@dennise_anorico_pexels_bw.jpg">Black & White</a></p>
+        <p><a href="images/beach@dennise_anorico_pexels_greyscale.jpg">Greyscale</a></p>
+        <p><a href="images/beach@dennise_anorico_pexels_gif.gif">GIF version</a></p>
+      </article>
+      <article>
+        <h4>Downsizing with CSS</h4>
+        <figure>
+          <!-- Base 500x300 shrunk by 40% via CSS class -->
+          <img src="images/beach@dennise_anorico_pexels.jpg" 
+               width="500" height="300" class="scale-40">
+          <figcaption>40% of image dimensions - CSS class</figcaption>
+        </figure>
+      </article>
+      <article>
+        <h4>Proper reduction with an image editor</h4>
+        <figure>
+          <!-- Compressed version already properly scaled, but base attributes added for consistency -->
+          <img src="images/beach@dennise_anorico_pexels_resized.jpg" width="500" height="300">
+          <figcaption>Compressed with an image editor</figcaption>
+        </figure>
+      </article>
+      <article>
+        <h4>Improper CSS proportions</h4>
+        <figure>
+          <!-- Base 500x300 with width shrunk to 40% via CSS class -->
+          <img src="images/beach@dennise_anorico_pexels.jpg" 
+               width="500" height="300" class="width-40">
+          <figcaption>40% of width, same height</figcaption>
+        </figure>
+      </article>
+      <article>
+        <h4>Improper enlargening with CSS</h4>
+        <figure>
+          <!-- Base 500x300 enlarged to 125% via CSS class -->
+          <img src="images/beach@dennise_anorico_pexels.jpg"
+               width="500" height="300" class="width-125">
+          <figcaption>125% of width</figcaption>
+        </figure>
+      </article>
+    </section>
+    <hr>
+    <section>
+      <h3>Personal Image</h3>
+      <figure>
+        <img src="images/comparison-photo.jpg" width="300" height="400">
+        <figcaption>This image was taken at 1:30PM on October 30, 20206.</figcaption>
+      </figure>
+      <article>
+        <h4>Downsizing with CSS</h4>
+        <figure>
+          <img src="images/comparison-photo.jpg" width="300" height="400" class="scale-50">
+          <figcaption>50% of image dimensions - CSS class</figcaption>
+        </figure>
+      </article>
+      <article>
+        <h4>Proper reduction with an image editor</h4>
+        <figure>
+          <img src="images/comparison-photo.jpg" width="300" height="400">
+          <figcaption>Compressed with an image editor</figcaption>
+        </figure>
+      </article>
+      <article>
+        <h4>Improper CSS proportions</h4>
+        <figure>
+          <img src="images/comparison-photo.jpg" width="300" height="400" class="width-40">
+          <figcaption>40% of width, same height</figcaption>
+        </figure>
+      </article>
+      <article>
+        <h4>Improper enlargening with CSS</h4>
+        <figure>
+          <img src="images/comparison-photo.jpg" width="300" height="400" class="width-125">
+          <figcaption>125% of width</figcaption>
+        </figure>
+      </article>
+    </section>
+    <div data-include="components/footer.html"></div>
+    <script src="scripts/HTMLInclude.min.js"></script>
+  </main>
+</body>
+</html>
