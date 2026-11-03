@@ -28,22 +28,23 @@
         CSS image manipulation would be obvious. Here's the original image, shrunk to 500x300 pixels for better viewing:
       </p>
       <figure>
-        <img src="images/beach@dennise_anorico_pexels.jpg" alt="An image of a seashore" width="500" height="300">
+        <img src="images/beach@dennise_anorico_pexels.jpg" alt="An image of a beach" width="500" height="300">
       </figure>
       <article>
         <h4>Pexels Image Versions</h4>
-        <p><a href="images/beach@dennise_anorico_pexels.jpg">Original Image</a></p>
-        <p><a href="images/beach@dennise_anorico_pexels_bw.jpg">Black & White</a></p>
-        <p><a href="images/beach@dennise_anorico_pexels_greyscale.jpg">Greyscale</a></p>
-        <p><a href="images/beach@dennise_anorico_pexels_gif.gif">GIF version</a></p>
+        <p><a href="images/beach@dennise_anorico_pexels.jpg" target="_blank">Original Image</a></p>
+        <p><a href="images/beach@dennise_anorico_pexels_bw.jpg" target="_blank">Black & White</a></p>
+        <p><a href="images/beach@dennise_anorico_pexels_greyscale.jpg" target="blank">Greyscale</a></p>
+        <p><a href="images/beach@dennise_anorico_pexels_gif.gif" target="_blank">GIF version</a></p>
       </article>
       <article>
         <h4>Downsizing with CSS</h4>
         <figure>
-          <!-- Base 500x300 shrunk by 40% via CSS class -->
+          <!-- Base 500x300 shrunk by 50% via inline CSS -->
           <img src="images/beach@dennise_anorico_pexels.jpg" 
-               width="500" height="300" class="scale-40">
-          <figcaption>40% of image dimensions - CSS class</figcaption>
+               width="500" height="300"
+               style="width: 50%; height: 50%;">
+          <figcaption>50% of image dimensions - inline CSS</figcaption>
         </figure>
       </article>
       <article>
@@ -57,19 +58,21 @@
       <article>
         <h4>Improper CSS proportions</h4>
         <figure>
-          <!-- Base 500x300 with width shrunk to 40% via CSS class -->
+          <!-- Base 500x300 with width shrunk to 33% via inline CSS -->
           <img src="images/beach@dennise_anorico_pexels.jpg" 
-               width="500" height="300" class="width-40">
-          <figcaption>40% of width, same height</figcaption>
+               width="500" height="300"
+               style="width: 33%;">
+          <figcaption>33% of width, same height</figcaption>
         </figure>
       </article>
       <article>
         <h4>Improper enlargening with CSS</h4>
         <figure>
-          <!-- Base 500x300 enlarged to 125% via CSS class -->
+          <!-- Base 500x300 enlarged to 120% via inline CSS -->
           <img src="images/beach@dennise_anorico_pexels.jpg"
-               width="500" height="300" class="width-125">
-          <figcaption>125% of width</figcaption>
+               width="500" height="300"
+               style="width: 120%;">
+          <figcaption>120% of width</figcaption>
         </figure>
       </article>
     </section>
@@ -77,35 +80,41 @@
     <section>
       <h3>Personal Image</h3>
       <figure>
-        <img src="images/comparison-photo-2.jpg" width="300" height="400">
-        <figcaption>This image was taken at 1:30PM on October 30, 20206.</figcaption>
+        <img src="images/comparison-photo-2.jpg" width="500" height="300">
+        <figcaption>PLACEHOLDER - replace with the face + object thing</figcaption>
       </figure>
       <article>
         <h4>Downsizing with CSS</h4>
         <figure>
-          <img src="images/comparison-photo-2.jpg" width="300" height="400" class="scale-50">
-          <figcaption>50% of image dimensions - CSS class</figcaption>
+          <img src="images/comparison-photo-2.jpg" 
+               width="500" height="300" 
+               style="width: 50%; height: 50%;">
+          <figcaption>50% of image dimensions - inline CSS</figcaption>
         </figure>
       </article>
       <article>
         <h4>Proper reduction with an image editor</h4>
         <figure>
-          <img src="images/comparison-photo-2.jpg" width="300" height="400">
+          <img src="images/comparison-photo-2.jpg" width="500" height="300">
           <figcaption>Compressed with an image editor</figcaption>
         </figure>
       </article>
       <article>
         <h4>Improper CSS proportions</h4>
         <figure>
-          <img src="images/comparison-photo-2.jpg" width="300" height="400" class="width-40">
-          <figcaption>40% of width, same height</figcaption>
+          <img src="images/comparison-photo-2.jpg" 
+               width="500" height="300" 
+               style="width: 33%;">
+          <figcaption>33% of width, same height</figcaption>
         </figure>
       </article>
       <article>
         <h4>Improper enlargening with CSS</h4>
         <figure>
-          <img src="images/comparison-photo-2.jpg" width="300" height="400" class="width-125">
-          <figcaption>125% of width</figcaption>
+          <img src="images/comparison-photo-2.jpg" 
+               width="500" height="300" 
+               style="width: 120%;">
+          <figcaption>120% of width</figcaption>
         </figure>
       </article>
     </section>
