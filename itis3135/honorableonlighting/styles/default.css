@@ -1,0 +1,95 @@
+/* No div, span, class or id is used on this site. Elements are styled by tag
+   and attribute selectors, and the JavaScript finds its elements through
+   data- attributes, so there is nothing to justify. */
+
+/* Palette. #F9F9F9 is an off-white (not pure white) and #02020B is a
+   near-black (not pure black); both come from the client's brand palette.
+   The indigo, mist and teal colors support them. */
+:root {
+  --night: #02020B;        /* near-black page background (not pure black) */
+  --paper: #F9F9F9;        /* off-white body text (not pure white) */
+  --amber: #F4AC32;        /* lamp-glow accent: links, dividers, buttons */
+  --indigo: #1A1A3E;       /* surface for header, figures and tables */
+  --indigo-light: #3A3A7A; /* borders on indigo surfaces */
+  --mist: #C4C4DC;         /* softer text for captions */
+  --teal: #35C4B0;         /* hummingbird-feather teal for hover and focus */
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--paper);
+  font-family: "Work Sans", Verdana, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+header, main, footer { max-width: 60rem; margin: 0 auto; padding: 1rem 1.25rem; }
+
+/* Header: a warm lamp glow in the corner, with an amber divider below. */
+header {
+  background: radial-gradient(circle at 12% 0%, rgba(244, 172, 50, 0.28), transparent 55%), var(--indigo);
+  border-bottom: 4px solid var(--amber);
+}
+footer { border-top: 4px solid var(--amber); margin-top: 2rem; font-size: 0.95rem; }
+
+h1, h2 { font-family: "Fraunces", Georgia, serif; line-height: 1.2; }
+header h1 { margin: 0; font-size: 1.9rem; }
+header h1 a { color: var(--paper); text-decoration: none; }
+header p { margin: 0.25rem 0 0.75rem; color: var(--amber); }
+main h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+
+/* Links: amber, with visited matching normal. */
+a:link, a:visited { color: var(--amber); text-underline-offset: 0.2em; }
+a:hover { color: var(--teal); }
+header h1 a:link, header h1 a:visited { color: var(--paper); }
+nav ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0; padding: 0; list-style: none; }
+nav a[aria-current="page"] { color: var(--paper); font-weight: 600; text-decoration-color: var(--amber); text-decoration-thickness: 3px; }
+
+p { max-width: 42rem; }
+main ul { padding-left: 1.25rem; }
+img { display: block; max-width: 100%; height: auto; }
+
+figure { margin: 1.5rem 0; padding: 1rem; background: var(--indigo); border-left: 6px solid var(--amber); }
+figcaption { margin-top: 0.5rem; color: var(--mist); }
+figure p { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+table { border-collapse: collapse; width: 100%; max-width: 32rem; background: var(--indigo); }
+caption { padding: 0.5rem; text-align: left; font-weight: 600; color: var(--amber); }
+th, td { padding: 0.5rem 0.75rem; border: 1px solid var(--indigo-light); text-align: left; }
+
+/* Buttons: amber with near-black text (high contrast); pressed state flips to off-white. */
+button {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--amber);
+  border-radius: 2rem;
+  background: var(--amber);
+  color: var(--night);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+button:hover { background: var(--teal); border-color: var(--teal); }
+button[aria-pressed="true"] { background: var(--paper); border-color: var(--amber); }
+p[role="group"] { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+p[data-open-status] { font-size: 1.3rem; font-weight: 600; color: var(--amber); }
+
+a:focus-visible, button:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+
+/* Small screens: stack the nav and give buttons room to tap. */
+@media (max-width: 40rem) {
+  header, main, footer { padding: 0.75rem 1rem; }
+  header h1 { font-size: 1.5rem; }
+  nav ul { flex-direction: column; gap: 0; }
+  nav a { display: block; padding: 0.5rem 0; }
+  button { flex: 1 1 8rem; }
+  table { max-width: none; }
+}
+
+/* Gentle color fades, only for visitors who have not asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  a, button { transition: color 0.2s, background-color 0.2s; }
+}
