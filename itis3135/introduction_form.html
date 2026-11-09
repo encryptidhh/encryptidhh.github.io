@@ -23,8 +23,8 @@
         <div class="field-row">
           <div class="field"><label for="first-name">First name</label>
             <input type="text" id="first-name" name="firstName" value="Hanniel" placeholder="First name" autocomplete="given-name" required></div>
-          <div class="field"><label for="middle-initial">Middle initial (optional)</label>
-            <input type="text" id="middle-initial" name="middleInitial" value="F" placeholder="Middle initial" maxlength="1" pattern="[A-Za-z]" title="One letter"></div>
+          <div class="field"><label for="middle-name">Middle name or initial (optional)</label>
+            <input type="text" id="middle-name" name="middleName" value="F" placeholder="Middle name or initial" autocomplete="additional-name"></div>
           <div class="field"><label for="nickname">Nickname (optional)</label>
             <input type="text" id="nickname" name="nickname" value="" placeholder="Nickname"></div>
           <div class="field"><label for="last-name">Last name</label>
@@ -57,6 +57,8 @@
         <img id="photo-preview" class="figure" src="images/red-hand-mirror-selfie.png" width="150" height="200" alt="Current introduction photo">
         <div class="field"><label for="photo">Upload a different picture (optional)</label>
           <input type="file" id="photo" name="photo" accept="image/*"></div>
+        <div class="field"><label for="picture-alt">Picture alt text</label>
+          <input type="text" id="picture-alt" name="pictureAlt" value="Mirror selfie of Hanniel Holness" placeholder="Describe the picture for screen readers" required></div>
         <div class="field"><label for="caption">Picture caption</label>
           <input type="text" id="caption" name="caption" value="Me on one random day in May" placeholder="Short caption" required></div>
       </fieldset>

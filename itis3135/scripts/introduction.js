@@ -8,7 +8,7 @@
   const coursesEl = $('courses');
   const preview = $('photo-preview');
   let imageSrc = DEFAULT_IMG;   // what the built page shows (a data URL after an upload)
-  let imageFile = DEFAULT_IMG;  // what the JSON and XML exports record
+  let imageFile = DEFAULT_IMG;  // what the JSON and XML exports record (the "img" key)
 
   const INITIAL_COURSES = [
     ['ITIS', '3135', 'Front End Web Development', 'Required for my major and cybersecurity concentration.'],
@@ -20,7 +20,7 @@
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-  /* ---------- Course rows ---------- */
+  /* ---------- Course rows (add + delete) ---------- */
   function courseRow(c) {
     return '<li class="course-group">' +
       '<input type="text" name="department" value="' + esc(c[0]) + '" placeholder="Dept (ITIS)" aria-label="Department" pattern="[A-Z]{2,4}" title="2-4 capital letters, such as ITIS" required>' +
@@ -32,17 +32,20 @@
   const initialCoursesHTML = INITIAL_COURSES.map(courseRow).join('');
   coursesEl.innerHTML = initialCoursesHTML;
 
+  // Keep at least one course on the page
   function updateDeleteButtons() {
     const only = coursesEl.children.length < 2;
     coursesEl.querySelectorAll('.delete-course').forEach((b) => { b.disabled = only; });
   }
   updateDeleteButtons();
 
-  $('add-course').addEventListener('click', () => {
+  function addCourse() {
     coursesEl.insertAdjacentHTML('beforeend', courseRow(['', '', '', '']));
     coursesEl.lastElementChild.querySelector('input').focus();
     updateDeleteButtons();
-  });
+  }
+  $('add-course').addEventListener('click', addCourse);
+
   coursesEl.addEventListener('click', (ev) => {
     if (ev.target.classList.contains('delete-course')) {
       ev.target.closest('li').remove();
@@ -68,88 +71,117 @@
     reader.readAsDataURL(file);
   });
 
-  /* ---------- Collect the form into one data object ---------- */
+  /* ---------- Helpers for names and dates ---------- */
+  // "F" or "f." becomes "F."; a full middle name is left as typed
+  function normalizeMiddle(raw) {
+    const m = raw.trim();
+    return /^[A-Za-z]\.?$/.test(m) ? m[0].toUpperCase() + '.' : m;
+  }
+
+  // 08/18/2026 -> 8/18/2026
+  function formatDate(value) {
+    const dm = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value);
+    return dm ? (+dm[1]) + '/' + (+dm[2]) + '/' + dm[3] : value;
+  }
+
+  /* ---------- Collect the form into one object that uses the data-model keys ---------- */
   function collect() {
     const v = (id) => $(id).value.trim();
-    const first = v('first-name'), last = v('last-name'), nick = v('nickname');
-    const mi = v('middle-initial').replace(/[^A-Za-z]/g, '').toUpperCase();
-    const mid = mi ? ' ' + mi + '.' : '';
-    const fullName = (first + mid + (nick ? ' "' + nick + '"' : '') + ' ' + last).replace(/\s+/g, ' ').trim();
-    const dm = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v('ack-date'));
-    const computer = {
-      manufacturer: v('manufacturer'), deviceType: v('device-type'),
-      operatingSystem: v('os'), version: v('os-version')
+
+    const computer = v('manufacturer') + ' ' + v('device-type') + ', ' +
+      v('os') + ', Version ' + v('os-version');
+
+    const personalInfo = {
+      statement: v('statement'),
+      personalBackground: v('personal-bg'),
+      professionalBackground: v('professional-bg'),
+      academicBackground: v('academic-bg')
     };
-    computer.summary = computer.manufacturer + ' ' + computer.deviceType + ', ' +
-      computer.operatingSystem + ', Version ' + computer.version;
+    // The data model has no key for this optional bullet, so it is only added when it is filled in
+    if (v('web-bg')) personalInfo.webDevelopmentBackground = v('web-bg');
+    personalInfo.primaryWorkComputer = computer;
+    personalInfo.primaryWorkLocation = v('work-location');
+    personalInfo.alternateComputerLocation = v('alternate');
+
     return {
-      name: { first: first, middleInitial: mi, nickname: nick, last: last,
-              heading: last + ', ' + first + mid },
-      acknowledgment: { statement: v('ack-statement'),
-                        initials: ((first[0] || '') + mi + (last[0] || '')).toUpperCase(),
-                        date: dm ? (+dm[1]) + '/' + (+dm[2]) + '/' + dm[3] : v('ack-date') },
-      mascot: { adjective: v('mascot-adjective'), animal: v('mascot-animal'), divider: v('divider') },
-      displayName: fullName + ' ' + v('divider') + ' ' + v('mascot-adjective') + ' ' + v('mascot-animal'),
-      picture: { src: imageSrc, file: imageFile, caption: v('caption') },
-      personalStatement: v('statement'),
-      background: { personal: v('personal-bg'), professional: v('professional-bg'),
-                    academic: v('academic-bg'), webDevelopment: v('web-bg') },
-      computer: computer,
-      workLocation: v('work-location'),
-      alternate: v('alternate'),
+      firstName: v('first-name'),
+      middleName: normalizeMiddle(v('middle-name')),
+      nickname: v('nickname'),
+      lastName: v('last-name'),
+      acknowledgment: v('ack-statement'),
+      acknowledgmentDate: formatDate(v('ack-date')),
+      prettyNameDivider: v('divider'),
+      adjectives: v('mascot-adjective'),
+      animal: v('mascot-animal'),
+      img: imageFile,
+      pictureAlt: v('picture-alt'),
+      caption: v('caption'),
+      personalInfo: personalInfo,
       courses: Array.from(coursesEl.children).map((li) => {
         const g = (n) => li.querySelector('[name="' + n + '"]').value.trim();
-        return { department: g('department'), number: g('number'),
-                 code: g('department') + g('number'), name: g('courseName'), reason: g('reason') };
+        return { department: g('department'), courseNumber: g('number'),
+                 courseTitle: g('courseName'), reasonForTaking: g('reason') };
       }),
+      quote: '“' + v('quote-text') + '”',
+      quoteAuthor: v('quote-author'),
       funnyItem: v('funny-item'),
-      alsoToShare: v('also-share'),
-      quote: { text: v('quote-text'), author: v('quote-author') },
-      links: Array.from(document.querySelectorAll('.link-input')).map((i) => ({ name: i.dataset.name, url: i.value.trim() }))
+      somethingToShare: v('also-share'),
+      footerLinks: Array.from(document.querySelectorAll('.link-input')).map((i) => ({ label: i.dataset.name, url: i.value.trim() }))
     };
   }
 
   /* ---------- Output builders ---------- */
   function entryHTML(d) {
+    const mid = d.middleName ? ' ' + d.middleName : '';
+    const nick = d.nickname ? ' "' + d.nickname + '"' : '';
+    const heading = d.lastName + ', ' + d.firstName + mid;
+    const displayName = (d.firstName + mid + nick + ' ' + d.lastName).replace(/\s+/g, ' ').trim() +
+      ' ' + d.prettyNameDivider + ' ' + d.adjectives + ' ' + d.animal;
+    const initials = ((d.firstName[0] || '') + (d.middleName[0] || '') + (d.lastName[0] || '')).toUpperCase();
+    const p = d.personalInfo;
     const bullet = (label, text) => '    <li><strong>' + esc(label) + '</strong> ' + esc(text) + '</li>\n';
-    let h = '<p class="entry-name"><strong>' + esc(d.name.heading) + '</strong></p>\n';
-    h += '<p>' + esc(d.acknowledgment.statement) + ' - <em>' + esc(d.acknowledgment.initials) + '. ' + esc(d.acknowledgment.date) + '</em></p>\n';
-    h += '<h6>' + esc(d.displayName) + '</h6>\n';
-    h += '<figure>\n  <img class="figure" src="' + esc(d.picture.src) + '" width="300" height="400" alt="Photo of ' + esc(d.name.first + ' ' + d.name.last) + '">\n';
-    h += '  <figcaption>' + esc(d.picture.caption) + '</figcaption>\n</figure>\n';
-    h += '<p>' + esc(d.personalStatement) + '</p>\n<ul>\n';
-    h += bullet('Personal Background:', d.background.personal);
-    h += bullet('Professional Background:', d.background.professional);
-    h += bullet('Academic Background:', d.background.academic);
-    if (d.background.webDevelopment) h += bullet('Background in this Course’s Material:', d.background.webDevelopment);
-    h += bullet('Primary Work Computer:', d.computer.summary);
-    h += bullet('Primary Work Location:', d.workLocation);
-    h += bullet('Alternate Computer & Location:', d.alternate);
+
+    let h = '<p class="entry-name"><strong>' + esc(heading) + '</strong></p>\n';
+    h += '<p>' + esc(d.acknowledgment) + ' - <em>' + esc(initials) + '. ' + esc(d.acknowledgmentDate) + '</em></p>\n';
+    h += '<h6>' + esc(displayName) + '</h6>\n';
+    h += '<figure>\n  <img class="figure" src="' + esc(imageSrc) + '" width="300" height="400" alt="' + esc(d.pictureAlt) + '">\n';
+    h += '  <figcaption>' + esc(d.caption) + '</figcaption>\n</figure>\n';
+    h += '<p>' + esc(p.statement) + '</p>\n<ul>\n';
+    h += bullet('Personal Background:', p.personalBackground);
+    h += bullet('Professional Background:', p.professionalBackground);
+    h += bullet('Academic Background:', p.academicBackground);
+    if (p.webDevelopmentBackground) h += bullet('Background in this Course’s Material:', p.webDevelopmentBackground);
+    h += bullet('Primary Work Computer:', p.primaryWorkComputer);
+    h += bullet('Primary Work Location:', p.primaryWorkLocation);
+    h += bullet('Alternate Computer & Location:', p.alternateComputerLocation);
     h += '    <li><strong>Courses I’m taking &amp; Why:</strong>\n      <ol>\n';
-    h += d.courses.map((c) => '        <li><strong>' + esc(c.code) + ' - ' + esc(c.name) + ':</strong> ' + esc(c.reason) + '</li>\n').join('');
+    h += d.courses.map((c) => '        <li><strong>' + esc(c.department + c.courseNumber) + ' - ' + esc(c.courseTitle) + ':</strong> ' + esc(c.reasonForTaking) + '</li>\n').join('');
     h += '      </ol>\n    </li>\n';
     if (d.funnyItem) h += bullet('Funny/Interesting Item to Remember Me by:', d.funnyItem);
-    if (d.alsoToShare) h += bullet('I’d Also Like to Share:', d.alsoToShare);
-    h += '</ul>\n<blockquote>\n  <p>“' + esc(d.quote.text) + '”</p>\n  <p>- <em>' + esc(d.quote.author) + '</em></p>\n</blockquote>\n';
-    h += '<p class="profile-links">' + d.links.map((l) => '<a href="' + esc(l.url) + '">' + esc(l.name) + '</a>').join(' | ') + '</p>\n';
+    if (d.somethingToShare) h += bullet('I’d Also Like to Share:', d.somethingToShare);
+    h += '</ul>\n<blockquote>\n  <p>' + esc(d.quote) + '</p>\n  <p>- <em>' + esc(d.quoteAuthor) + '</em></p>\n</blockquote>\n';
+    h += '<p class="profile-links">' + d.footerLinks.map((l) => '<a href="' + esc(l.url) + '">' + esc(l.label) + '</a>').join(' | ') + '</p>\n';
     return h;
   }
 
   function htmlDoc(d) {
+    const mid = d.middleName ? ' ' + d.middleName : '';
+    const nick = d.nickname ? ' "' + d.nickname + '"' : '';
+    const title = (d.firstName + mid + nick + ' ' + d.lastName).replace(/\s+/g, ' ').trim() +
+      ' ' + d.prettyNameDivider + ' ' + d.adjectives + ' ' + d.animal;
     return '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n' +
       '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
-      '  <title>' + esc(d.displayName) + ' | Introduction</title>\n' +
+      '  <title>' + esc(title) + ' | Introduction</title>\n' +
       '  <link rel="stylesheet" href="styles/default.css">\n' +
       '</head>\n<body>\n<main class="content-block">\n' + entryHTML(d) + '</main>\n</body>\n</html>\n';
   }
 
-  function exportData(d) {
-    return Object.assign({}, d, { picture: { file: d.picture.file, caption: d.picture.caption } });
-  }
+  // Element names for the items inside each array
+  const XML_ITEMS = { courses: 'course', footerLinks: 'link' };
 
   function toXml(name, val, ind) {
     if (Array.isArray(val)) {
-      const item = name === 'courses' ? 'course' : 'link';
+      const item = XML_ITEMS[name] || 'item';
       return ind + '<' + name + '>\n' + val.map((x) => toXml(item, x, ind + '  ')).join('') + ind + '</' + name + '>\n';
     }
     if (val && typeof val === 'object') {
@@ -160,9 +192,9 @@
 
   const FORMATS = {
     html: { label: 'HTML', ext: 'html', mime: 'text/html', build: htmlDoc },
-    json: { label: 'JSON', ext: 'json', mime: 'application/json', build: (d) => JSON.stringify(exportData(d), null, 2) },
+    json: { label: 'JSON', ext: 'json', mime: 'application/json', build: (d) => JSON.stringify(d, null, 2) },
     xml:  { label: 'XML',  ext: 'xml',  mime: 'application/xml',
-            build: (d) => '<?xml version="1.0" encoding="UTF-8"?>\n' + toXml('introduction', exportData(d), '') }
+            build: (d) => '<?xml version="1.0" encoding="UTF-8"?>\n' + toXml('introduction', d, '') }
   };
 
   function generate(kind) {
@@ -214,6 +246,25 @@
   dateInput.addEventListener('input', checkDate);
   checkDate();
 
+  /* ---------- Required-field validation ---------- */
+  // The browser's "required" attribute accepts a box that holds only spaces, so check the trimmed value too.
+  // Returns the first field that is not filled in, or null when the form is complete.
+  function findMissingRequired() {
+    let firstMissing = null;
+    form.querySelectorAll('[required]').forEach((el) => {
+      if (el === dateInput) return;   // the date has its own check above
+      const blank = el.value.trim() === '';
+      el.setCustomValidity(blank ? 'Please fill out this field.' : '');
+      if (blank && !firstMissing) firstMissing = el;
+    });
+    return firstMissing;
+  }
+
+  // Clear the "blank" message as soon as the person starts typing again
+  form.addEventListener('input', (ev) => {
+    if (ev.target !== dateInput && ev.target.setCustomValidity) ev.target.setCustomValidity('');
+  });
+
   /* ---------- Submit, Reset, Clear ---------- */
   function showForm() {
     result.hidden = true;
@@ -222,18 +273,27 @@
   }
 
   form.addEventListener('submit', (ev) => {
-    ev.preventDefault();   // the browser has already blocked the submit if a required field is empty
+    ev.preventDefault();   // stops the page refresh / default form behavior
+
+    const missing = findMissingRequired();
+    if (missing) { missing.reportValidity(); return; }
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
     result.innerHTML = entryHTML(collect()) + '<p><a href="#" id="reset-link">Reset and fill out the form again</a></p>';
     form.hidden = true;
     $('form-heading').hidden = true;
     result.hidden = false;
   });
 
+  // Reset: back to the pre-filled values, the starting courses and the default picture
   form.addEventListener('reset', () => {
     coursesEl.innerHTML = initialCoursesHTML;
     updateDeleteButtons();
     resetImage();
-    setTimeout(checkDate, 0);   // the browser restores the date value after this event
+    setTimeout(() => {          // the browser restores the field values after this event
+      form.querySelectorAll('input, textarea').forEach((el) => el.setCustomValidity(''));
+      checkDate();
+    }, 0);
   });
 
   result.addEventListener('click', (ev) => {
@@ -244,8 +304,9 @@
     }
   });
 
+  // Clear: empty every field so the placeholders show
   $('clear').addEventListener('click', () => {
-    form.querySelectorAll('input, textarea').forEach((el) => { el.value = ''; });
+    form.querySelectorAll('input, textarea').forEach((el) => { el.value = ''; el.setCustomValidity(''); });
     resetImage();
     checkDate();
   });
