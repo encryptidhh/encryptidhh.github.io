@@ -1,0 +1,79 @@
+{
+  "firstName": "Hanniel",
+  "middleName": "F.",
+  "nickname": "",
+  "lastName": "Holness",
+  "acknowledgment": "I understand that this is a public document, and I won’t put anything here I wouldn’t want anyone to see",
+  "acknowledgmentDate": "8/18/2026",
+  "prettyNameDivider": "|",
+  "adjectives": "Honorable",
+  "animal": "Hummingbird",
+  "img": "images/red-hand-mirror-selfie.png",
+  "pictureAlt": "Mirror selfie of Hanniel Holness",
+  "caption": "Me on one random day in May",
+  "personalInfo": {
+    "statement": "Hi, my name is Hanniel Holness. I’m 21 years old, and a senior at UNCC, majoring in computer science. I’m a transfer student, having earned an Associate’s Degree before coming to Charlotte. I specialize in cybersecurity, so I’m aiming for an industry job that focuses on that after graduation.",
+    "personalBackground": "I moved to NC from the UK 4 years ago.",
+    "professionalBackground": "I took an internship while at community college. I’m also working two jobs, including as an Instructional Assistant.",
+    "academicBackground": "I have an Associates in Science degree. I’m also an early entry student for the Masters in Cybersecurity program (i.e., taking graduate and undergraduate courses at the same time).",
+    "primaryWorkComputer": "HP ENVY 15.6” x360 2-in-1 Laptop, Microsoft Windows 11, Version 25H2",
+    "primaryWorkLocation": "Home, or the library",
+    "alternateComputerLocation": "Using a computer from the library."
+  },
+  "courses": [
+    {
+      "department": "ITIS",
+      "courseNumber": "3135",
+      "courseTitle": "Front End Web Development",
+      "reasonForTaking": "Required for my major and cybersecurity concentration."
+    },
+    {
+      "department": "ITIS",
+      "courseNumber": "6214",
+      "courseTitle": "Usable Security & Privacy",
+      "reasonForTaking": "Interesting graduate level course, needed for my major"
+    },
+    {
+      "department": "ITSC",
+      "courseNumber": "3160",
+      "courseTitle": "Database Design & Implementation",
+      "reasonForTaking": "Needed for my major, teaches SQL"
+    },
+    {
+      "department": "ITSC",
+      "courseNumber": "3155",
+      "courseTitle": "Software Development",
+      "reasonForTaking": "Required for my major, teaches enterprise software design/development"
+    }
+  ],
+  "quote": "“Just know that the earth is just a rock without the voices of art”",
+  "quoteAuthor": "Kendrick Lamar (Pray, unreleased track)",
+  "funnyItem": "",
+  "somethingToShare": "",
+  "footerLinks": [
+    {
+      "label": "CLT Web",
+      "url": "https://webpages.charlotte.edu/hholnes1"
+    },
+    {
+      "label": "GitHub.io",
+      "url": "https://encryptidhh.github.io/"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/encryptidhh"
+    },
+    {
+      "label": "freeCodeCamp",
+      "url": "https://www.freecodecamp.org/codinges"
+    },
+    {
+      "label": "Codecademy",
+      "url": "https://www.codecademy.com/@hannielHolness5213116756"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/hanniel-holness/"
+    }
+  ]
+}
